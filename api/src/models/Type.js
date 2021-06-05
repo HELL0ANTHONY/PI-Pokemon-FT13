@@ -9,7 +9,13 @@ module.exports = sequelize => {
     }
   },
     {
-      timestamps: false
+      timestamps: false,
+      hooks: {
+        beforeCreate(type) {
+          type.name = type.name.toLowerCase();
+          return type;
+        }
+      }
     }
   );
 };

@@ -48,7 +48,13 @@ module.exports = sequelize => {
       allowNull: true
     }
   }, {
-    timestamps: false
+    timestamps: false,
+    hooks: {
+      beforeCreate: pokemon => {
+        pokemon.name = pokemon.name.toLowerCase();
+        return pokemon;
+      }
+    }
   }
   );
 };

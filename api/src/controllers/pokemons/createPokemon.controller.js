@@ -8,6 +8,9 @@ const createPokemon = async (req, res, next) => {
     ...pokemonData
   } = req.body;
 
+  const convertToLowerCase    = types.map(({ name }) => name.toLowerCase());
+  const typesWithoutDuplicate = [...new Set(convertToLowerCase)].map(name => ({ name }));
+
   const newPokemon = await Pokemon.create({
     id,
     ...pokemonData
@@ -25,7 +28,7 @@ const createPokemon = async (req, res, next) => {
     ]
   });
 
-  const promisesOfTypes = types.map(({ name }) => Type.findOrCreate({
+  const promisesOfTypes = typesWithoutDuplicate.map(({ name }) => Type.findOrCreate({
     where: {
       name
     }
