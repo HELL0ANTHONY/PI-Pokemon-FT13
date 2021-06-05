@@ -1,7 +1,9 @@
 const { Router } = require("express");
+const router     = Router();
+
 const routerHelper = require("../helper/routerHelper");
-const router = Router();
+const getTypes     = require("../controllers/types/getTypes.controller");
 
-
+router.get("/types",routerHelper(getTypes));
 
 module.exports = router;
