@@ -42,6 +42,10 @@ module.exports = sequelize => {
       type: INTEGER,
       allowNull: true,
       defaultValue: 0
+    },
+    image: {
+      type: STRING,
+      allowNull: true
     }
   }, {
     timestamps: false
