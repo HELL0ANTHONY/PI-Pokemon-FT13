@@ -8,7 +8,7 @@ const {
 
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASS}@${DB_HOST}/${DB_NAME}`, {
   logging: false,
-  native: false,
+  native : false,
 });
 const basename      = path.basename(__filename);
 const modelDefiners = [];
@@ -27,8 +27,9 @@ let entries          = Object.entries(sequelize.models);
 let capsEntries      = entries.map(entry => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
     sequelize.models = Object.fromEntries(capsEntries);
 
-const { Pokemon } = sequelize.models;
-
+const { Pokemon, Type } = sequelize.models;
+Pokemon.belongsToMany(Type, { through: "PokemonType" });
+Type.belongsToMany(Pokemon, { through: "PokemonType" });
 
 module.exports = {
   ...sequelize.models,
