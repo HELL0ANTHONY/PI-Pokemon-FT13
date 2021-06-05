@@ -1,7 +1,10 @@
 const { Type } = require("../../db");
 
 const getTypes = async (req, res, next) => {
-  res.json("hello types");
+  const types = await Type.findAll();
+  return res.json({
+    data: types
+  });
 };
 
 module.exports = getTypes;

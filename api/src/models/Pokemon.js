@@ -51,7 +51,7 @@ module.exports = sequelize => {
     timestamps: false,
     hooks: {
       beforeCreate: pokemon => {
-        pokemon.name = pokemon.name.toLowerCase();
+        pokemon.name = pokemon.name.toLowerCase().trim();
         return pokemon;
       }
     }
