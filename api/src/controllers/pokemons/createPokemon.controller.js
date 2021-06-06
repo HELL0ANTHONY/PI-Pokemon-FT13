@@ -30,13 +30,13 @@ const createPokemon = async (req, res, next) => {
     .filter(name => name);
 
   const typesWithoutDuplicate = [...new Set(cleanTypes)].map(name => ({ name }));
-  const promisesOfTypes       = typesWithoutDuplicate.map(({ name }) => Type.findOrCreate({
+  const promiseOfTypes        = typesWithoutDuplicate.map(({ name }) => Type.findOrCreate({
     where: {
       name
     }
   }));
 
-  const typesResolve = await Promise.all(promisesOfTypes);
+  const typesResolve = await Promise.all(promiseOfTypes);
   const pokemonTypes = typesResolve.flat().filter(e => typeof e !== "boolean");
   await newPokemon.addTypes(pokemonTypes);
 
