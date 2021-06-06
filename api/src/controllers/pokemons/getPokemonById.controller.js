@@ -1,23 +1,34 @@
-const fetchData = require("../../helper/fetchData");
-const { Pokemon, Type } = require("../../db");
-const { pokemonById: endPoint } = require("../../constants/index");
+const fetchData                   = require("../../helper/fetchData");
+const { isNumeric }               = require("../../helper/isNumeric");
+const { Pokemon, Type }           = require("../../db");
+const { pokemonById: endpoint }   = require("../../constants/index");
 const { filteringAndSortingData } = require("../../helper/filteringAndSortingData");
 
-/*
-  - [ ] Los campos mostrados en la ruta principal para cada pokemon (imagen, nombre y tipos)
-- [ ] Número de Pokemon (id)
-- [ ] Estadísticas (vida, fuerza, defensa, velocidad)
-- [ ] Altura y peso
-*/
-
 async function getPokemonById(req, res, next) {
-  const id = req.params.id;
+  const id      = req.params.id;
+  let   pokemon = [];
 
-  const pokemonFromApi = await fetchData(endPoint(id));
-  const filteredAndSorted = filteringAndSortingData(pokemonFromApi);
+  if (isNumeric(id)) {
+    const pokemonFromApi = await fetchData(endpoint(+id));
+          pokemon        = filteringAndSortingData(pokemonFromApi);
+  } else {
+    const pokemonFromDB = await Pokemon.findByPk(id, {
+      include: {
+        model: Type,
+        attributes: ["name"],
+        through: {
+          attributes: []
+        }
+      }
+    });
+    pokemon = pokemonFromDB ? [pokemonFromDB] : [];
+  }
+
+  if (!pokemon.length)
+    throw new Error(`There is no pokemon with the id: ${id}`);
 
   return res.json({
-    data: filteredAndSorted
+    data: pokemon
   });
 }
 
