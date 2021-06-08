@@ -1,15 +1,18 @@
+const Cache                       = require("./Cache");
 const fetchData                   = require("../../helper/fetchData"); 
+const pagination                  = require("./pagination");
+const sortPokemons                = require("./sortPokemons.js");
 const { Pokemon, Type }           = require("../../db");
 const { pokemonById: endpoint }   = require("../../constants");
 const { filteringAndSortingData } = require("../../helper/filteringAndSortingData");
-const pagination                  = require("./pagination");
-const Cache                       = require("./cache");
 
 const cache = new Cache();
 
 async function getPokemons(req, res, next) {
   const LIMIT = 12;
   const page  = Number.parseInt(req.query.page);
+  const sort  = req.query.sort?.trim();
+  const order = req.query.order?.trim();
 
   if (Number.isNaN(page)) throw new Error("'Page' is not a number");
 
@@ -23,7 +26,7 @@ async function getPokemons(req, res, next) {
     }
   });
 
-  const NUMBER_OF_REQUESTS_TO_THE_API = 20;
+  const NUMBER_OF_REQUESTS_TO_THE_API = 12;
 
   if (!cache.getLength()) {
     const promises = [...Array(NUMBER_OF_REQUESTS_TO_THE_API).keys()]
@@ -31,7 +34,6 @@ async function getPokemons(req, res, next) {
     const listOfPokemons     = await Promise.all(promises);
     const pokemonsFromTheApi = filteringAndSortingData(listOfPokemons);
     cache.setValue(pokemonsFromTheApi);
-    console.log("inside the 'if' statement");
   } 
 
   const pokemons   = [...pokemonsFromTheDB, ...cache.getValues()];
@@ -42,13 +44,23 @@ async function getPokemons(req, res, next) {
   if ((page <= 0) || (page > rest.totalPages))
     throw new Error("The page you are requesting does not exists");
 
-  const data = pokemons.slice(startIndex, endIndex);
+  const data           = pokemons.slice(startIndex, endIndex);
+  const paginationData = { rows: data.length, ...rest };
+
+  // sortPokemons
+  if(sort !== undefined && sort && sort !== "default") {
+    const sorted = (sort === "name")
+      ? sortPokemons().byName(data, order)
+      : sortPokemons().byForce(data, order);
+
+    return res.json({
+      paginationData,
+      data: sorted
+    }); 
+  }
 
   return res.json({
-    PaginationData: {
-      rows: data.length,
-      ...rest
-    },
+    paginationData,
     data
   });
 }
