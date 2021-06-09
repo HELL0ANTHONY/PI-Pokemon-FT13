@@ -1,11 +1,16 @@
+import { withRouter } from "react-router-dom";
+import Routes from "./routes/Routes";
+import Navbar from "./components/navbar/Navbar";
+
 import './App.css';
 
-function App() {
+const App = ({ location }) => {
   return (
-    <div className="App">
-      <h1>Henry Pokemon</h1>
-    </div>
+    <>
+      {location.pathname !== '/' && <Navbar />}
+      <Routes />
+    </>
   );
-}
+};
 
-export default App;
+export default withRouter(App);
