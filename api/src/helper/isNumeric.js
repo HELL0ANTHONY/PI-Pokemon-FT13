@@ -1,3 +1,5 @@
-exports.isNumeric = str => (typeof str != "string")
-  ? false
-  : (!isNaN(str) && !isNaN(parseFloat(str)));
+function isNumeric(str) {
+  if (typeof str != "string") return false;
+  return !isNaN(str) && !isNaN(parseFloat(str));
+}
+module.exports = isNumeric;
