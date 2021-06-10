@@ -1,0 +1,48 @@
+:root {
+  --select-checkbox: #00d200;
+}
+
+.checkbox {
+  display        : flex;
+  justify-content: center;
+  margin         : 5px;
+  position       : relative;
+}
+
+.checkbox-label {
+  width          : 300px;
+  height         : 50px;
+  display        : flex;
+  align-items    : center;
+  justify-content: center;
+  position       : relative;
+  cursor         : pointer;
+}
+
+.checkbox-text {
+  font-family   : "Roboto Mono";
+  text-transform: capitalize;
+  position      : absolute;
+  top           : 30px;
+  left          : 130px;
+}
+
+.checkbox-text:hover {
+  color: var(--select-checkbox);
+}
+
+.checkbox-input {
+  width     : 18px;
+  height    : 18px;
+  align-self: flex-end;
+  position  : absolute;
+  left      : -60px;
+}
+
+.checkbox-btn-container {
+  display        : flex;
+  flex-direction : column;
+  justify-content: center;
+  height         : 50px;
+  margin         : 20px;
+}
