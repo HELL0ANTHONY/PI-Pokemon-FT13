@@ -24,6 +24,7 @@ server.use((req, res, next) => {
 });
 
 server.use('/', routes);
+server.disable("etag"); // status 304 disable;
 
 server.use((err, req, res, next) => {
   const status  = err.status || 500;

@@ -1,4 +1,3 @@
-const { isNumeric }             = require("../../helper/isNumeric");
 const pokeApi                   = require("./getPokemonFromTheApi");
 const { Pokemon, Type }         = require("../../db");
 const { pokemonById: endpoint } = require("../../constants/index");
@@ -7,7 +6,7 @@ async function getPokemonById(req, res, next) {
   const id      = req.params.id;
   let   pokemon = [];
 
-  if (isNumeric(id)) pokemon = await pokeApi(endpoint(+id));
+  if (!isNaN(id)) pokemon = await pokeApi(endpoint(+id));
   else {
     const pokemonFromDB = await Pokemon.findByPk(id, {
       include: {
