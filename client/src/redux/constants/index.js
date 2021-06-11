@@ -1,0 +1,9 @@
+export const SORT                  = "SORT";
+export const CHANGE_PAGE           = "CHANGE_PAGE";
+export const CHANGE_ORDE           = "CHANGE_ORDER";
+export const FETCH_ERROR           = "FETCH_ERROR";
+export const FETCH_PENDING         = "FETCH_PENDING";
+export const FETCH_POKEMONS        = "FETCH_POKEMONS";
+export const FETCH_POKEMON_BY_ID   = "FETCH_POKEMON_BY_ID";
+export const FETCH_POKEMON_TYPES   = "FETCH_POKEMON_TYPES";
+export const FETCH_POKEMON_BY_NAME = "FETCH_POKEMON_BY_NAME";
