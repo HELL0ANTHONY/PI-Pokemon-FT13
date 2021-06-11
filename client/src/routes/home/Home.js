@@ -1,25 +1,25 @@
 import { useEffect } from "react";
+import { printCards } from "../../helpers/printCards";
+
+// redux
 import { connect } from "react-redux";
 import fetchPokemons from "../../redux/reducers/fetchPokemons";
 
-import HomeLogic from "./HomeLogic"; 
 import "./home.css";
 
-const Home = ({ fetchPokemons, pokemons }) => {
-  const { printCards } = HomeLogic();
-
+const Home = ({ fetchPokemons, pokemons }) => { 
   useEffect(() => {
     fetchPokemons();
   }, [fetchPokemons]); 
 
   return (
-    <div>
+    <main>
     {
       pokemons?.data 
       ? printCards(pokemons.data) 
       : <h1>Loading...</h1>
     }
-    </div>
+    </main>
   ); 
 };
 
