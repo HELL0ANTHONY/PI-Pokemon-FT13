@@ -1,7 +1,7 @@
 import { Switch, Route } from "react-router-dom";
 import Landing from "./landing/Landing";
 import Home from "./home/Home";
-import Detail from "./details/Details";
+import Details from "./details/Details";
 import PokemonForm from "./pokemonForm/PokemonForm";
 
 const Routes = _ => {
@@ -12,7 +12,7 @@ const Routes = _ => {
           <Landing message={"Who's that pokemon?"} />
         </Route>
         <Route path="/home" component={Home} />
-        <Route path="/detail/:id" component={Detail} />
+        <Route path="/details/:id" component={Details} />
         <Route path="/form" component={PokemonForm} />
       </Switch>
     </>

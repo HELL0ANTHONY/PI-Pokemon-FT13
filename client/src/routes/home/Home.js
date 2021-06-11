@@ -13,13 +13,13 @@ const Home = ({ fetchPokemons, pokemons }) => {
   }, [fetchPokemons]); 
 
   return (
-    <main>
+    <div>
     {
       pokemons?.data 
       ? printCards(pokemons.data) 
       : <h1>Loading...</h1>
     }
-    </main>
+    </div>
   ); 
 };
 

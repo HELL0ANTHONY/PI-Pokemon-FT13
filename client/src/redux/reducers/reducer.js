@@ -16,13 +16,13 @@ const initialState = {
   pokemons: undefined,
   pokemonTypes: undefined,
   pokemonById: undefined,
-  pokemonByName: undefined,
+/**  pokemonByName: undefined,
   sort: "default",
   order: "",
-  page: 1,
+  page: 1, */
 };
 
-export function rootReducer(state = initialState, { type, payload }) {
+export function rootReducer(state = initialState, { type, payload, error }) {
   switch (type) {
     case FETCH_PENDING:
       return {
@@ -33,13 +33,19 @@ export function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         pending: false,
-        error: payload
+        error: error
       }
     case FETCH_POKEMONS:
       return {
         ...state,
         pending: false,
         pokemons: payload
+      }
+    case FETCH_POKEMON_BY_ID:
+      return {
+        ...state,
+        pending: false,
+        pokemonById: payload
       }
     default: 
       return state;

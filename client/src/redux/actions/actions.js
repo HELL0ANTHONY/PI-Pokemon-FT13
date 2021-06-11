@@ -5,8 +5,8 @@ import {
   FETCH_ERROR,
   FETCH_PENDING, 
   FETCH_POKEMONS,
-  /*FETCH_POKEMON_BY_ID,
-  FETCH_POKEMON_TYPES,
+  FETCH_POKEMON_BY_ID,
+  /*FETCH_POKEMON_TYPES,
   FETCH_POKEMON_BY_NAME */
 } from "../constants";
 
@@ -24,15 +24,17 @@ export const fetchPokemons = payload => ({
   payload
 });
 
+export const fetchPokemonById = payload => ({
+  type: FETCH_POKEMON_BY_ID,
+  payload 
+});
+
+
 /*export const fetchPokemonByName = payload => ({
   type: FETCH_POKEMON_BY_NAME,
   payload
 });
 
-export const fetchPokemonById = payload => ({
-  type: FETCH_POKEMON_BY_ID,
-  payload 
-});
 
 export const fetchPokemonTypes = payload => ({
   type: FETCH_POKEMON_TYPES,
