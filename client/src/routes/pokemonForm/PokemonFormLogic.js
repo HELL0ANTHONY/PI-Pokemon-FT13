@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useModal } from "../../hooks/useModal";
 
-// aun falta los Types de los pokemones
 export const PokemonFormLogic = () => {
-  const [input, setInput] = useState(initialState());
+  const [input, setInput]                 = useState(initialState());
+  const [checkboxTypes, setCheckboxTypes] = useState([]);
+  const [isOpenModalOfTypes, openModalOfTypes, closeModalOfTypes] = useModal();
 
   const handleInput = e => {
     const { name, value } = e.target;
@@ -14,8 +16,36 @@ export const PokemonFormLogic = () => {
   };
 
   return {
-    inputAttributes, input
+    inputAttributes,
+    checkboxLogic,
+    input,
+    checkboxTypes
   };
+
+  function checkboxLogic() {
+    return {
+      name: checkboxTypes,
+      title: "Select Pokemon Types",
+      isOpen: isOpenModalOfTypes,
+      closeModal: event => {
+        event.preventDefault();
+        closeModalOfTypes();
+      },
+      openModal: event => {
+        event.preventDefault();
+        openModalOfTypes();
+      }, 
+      onChange: event => {
+        event.preventDefault();
+        if (event.target.checked) {
+          setCheckboxTypes([
+            ...checkboxTypes,
+            event.target.value
+          ]);
+        }
+      }
+    };
+  }
 
   function inputAttributes() {
     return [
