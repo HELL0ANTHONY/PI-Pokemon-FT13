@@ -22,7 +22,6 @@ const PokemonForm = ({ createPokemon, getPokemonTypes, newPokemon, pokemonTypes 
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log(input);
     alert("New Pokemon Created");
   };
 
