@@ -3,8 +3,11 @@ import { useModal } from "../../hooks/useModal";
 
 export const PokemonFormLogic = () => {
   const [input, setInput]                 = useState(initialState());
+  const [newInputs, setNewInputs]         = useState([]);
   const [checkboxTypes, setCheckboxTypes] = useState([]);
-  const [isOpenModalOfTypes, openModalOfTypes, closeModalOfTypes] = useModal();
+
+  const [isOpenModalOfTypes, openModalOfTypes, closeModalOfTypes]    = useModal();
+  const [isOpenModalNewTypes, openModalNewTypes, closeModalNewTypes] = useModal();
 
   const handleInput = e => {
     const { name, value } = e.target;
@@ -18,9 +21,38 @@ export const PokemonFormLogic = () => {
   return {
     inputAttributes,
     checkboxLogic,
-    input,
-    checkboxTypes
+    createNewTypesLogic
   };
+
+  function createNewTypesLogic() {
+    return {
+      title: "Add the new pokemon types",
+      newInputs,
+      isOpen: isOpenModalNewTypes,
+      openModal: event => {
+        event.preventDefault();
+        openModalNewTypes();
+      },
+      closeModal: event => {
+        event.preventDefault();
+        closeModalNewTypes();
+      },
+      addNewInput: event => {
+        event.preventDefault();
+        setNewInputs([...newInputs, ""]);
+      },
+      removeInput: (event, index) => {
+        event.preventDefault();
+        newInputs.slice(index, 1);
+        setNewInputs([...newInputs]);
+      },
+      setValue: (event, index) => {
+        event.preventDefault();
+        newInputs[index] = event.target.value;
+        setNewInputs([...newInputs]);
+      }
+    }; 
+  }
 
   function checkboxLogic() {
     return {

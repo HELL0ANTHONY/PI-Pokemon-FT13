@@ -7,18 +7,14 @@ import { PokemonFormLogic } from "./PokemonFormLogic";
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
 import CheckboxModal from "../../components/modals/checkboxModal/CheckboxModal";
+import AddTypesModal from "../../components/modals/addTypesModal/AddTypesModal";
 import "./pokemonForm.css";
 
-
 const PokemonForm = ({ createPokemon, getPokemonTypes, newPokemon, pokemonTypes }) => {
-  const { inputAttributes, checkboxLogic, input, checkboxTypes } = PokemonFormLogic();
+  const { inputAttributes, checkboxLogic, createNewTypesLogic } = PokemonFormLogic();
   const { openModal, ...modalCheckboxAttributes } = checkboxLogic(); // no tocar!
+  const { openModal: openModalOfNewTypes, ...newTypesModalAttributes } = createNewTypesLogic(); // no tocar!
   const inputs = inputAttributes(); // no tocar!
-
-  console.log({input});
-  console.log({checkboxTypes});
-
-
 
   useEffect(() => {
     getPokemonTypes();
@@ -36,12 +32,19 @@ const PokemonForm = ({ createPokemon, getPokemonTypes, newPokemon, pokemonTypes 
         <h1>Create your new Pokemon</h1>
         <p>Please fill in this form to create a new Pokemon.</p>
         <hr />
-        {inputs.map((input, id) => <Input key={id} {...input} />)} 
+        {inputs.map((input, index) => <Input key={index} {...input} />)} 
       </div>
       
       <CheckboxModal list={pokemonTypes} {...modalCheckboxAttributes} />
+      <AddTypesModal {...newTypesModalAttributes} />
       
       <div className="buttons">
+        <Button
+          onClick={openModalOfNewTypes}
+          buttonSize="btn-medium"
+          buttonStyle="btn--success--solid"
+        >Add New Types</Button>
+        
         <Button
           onClick={openModal}
           buttonSize="btn-medium"
