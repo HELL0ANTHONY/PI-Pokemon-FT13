@@ -14,11 +14,10 @@ export const PokemonFormLogic = () => {
   };
 
   return {
-    formAttributes,
-    input
+    inputAttributes, input
   };
 
-  function formAttributes() {
+  function inputAttributes() {
     return [
       {
         label: "Pokemon Name:",

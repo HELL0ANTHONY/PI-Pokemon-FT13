@@ -1,14 +1,14 @@
 import {
-  SORT,
+/*  SORT,
   CHANGE_PAGE,
-  CHANGE_ORDER,
+  CHANGE_ORDER, */
   FETCH_ERROR,
   FETCH_PENDING,
   FETCH_POKEMONS,
   CREATE_NEW_POKEMON,
   FETCH_POKEMON_BY_ID,
   FETCH_POKEMON_TYPES,
-  FETCH_POKEMON_BY_NAME
+  /* FETCH_POKEMON_BY_NAME */
 } from "../constants";
 
 const initialState = {
@@ -54,6 +54,12 @@ export function rootReducer(state = initialState, { type, payload, error }) {
         ...state,
         pending: false,
         newPokemon: payload
+      }
+    case FETCH_POKEMON_TYPES:
+      return {
+        ...state,
+        pending: false,
+        pokemonTypes: payload
       }
     default: 
       return state;
