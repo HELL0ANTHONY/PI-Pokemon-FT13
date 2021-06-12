@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { printCards } from "../../helpers/printCards";
 
-// redux
 import { connect } from "react-redux";
 import fetchPokemons from "../../redux/reducers/fetchPokemons";
 
@@ -14,11 +13,11 @@ const Home = ({ fetchPokemons, pokemons }) => {
 
   return (
     <div>
-    {
-      pokemons?.data 
-      ? printCards(pokemons.data) 
-      : <h1>Loading...</h1>
-    }
+      {
+        pokemons?.data 
+          ? printCards(pokemons.data) 
+          : <h1>Loading...</h1>
+      }
     </div>
   ); 
 };

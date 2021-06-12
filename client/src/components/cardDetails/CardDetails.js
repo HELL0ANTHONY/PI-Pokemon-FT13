@@ -1,6 +1,6 @@
 import "./cardDetails.css";
 
-const CardDetails = ({ id, name, image, height, weight, types, hp, speed, force, defense }) => {
+const CardDetails = ({ id, name, image, height, weight, types, hp, speed, baseExperience, defense }) => {
   const pokemonTypes = types.map(({ name }) => name).join(", ");
     return (
           <>
@@ -53,7 +53,7 @@ const CardDetails = ({ id, name, image, height, weight, types, hp, speed, force,
                       <span>{defense || "No detail"}</span>
                       <span>|</span>
                       <span>Force:</span>
-                      <span>{force || "No detail"}</span>
+                      <span>{baseExperience || "No detail"}</span>
                     </div>
                   </div>
                 </div>

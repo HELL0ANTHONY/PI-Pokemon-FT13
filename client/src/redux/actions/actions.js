@@ -6,6 +6,7 @@ import {
   FETCH_PENDING, 
   FETCH_POKEMONS,
   FETCH_POKEMON_BY_ID,
+  CREATE_NEW_POKEMON,
   /*FETCH_POKEMON_TYPES,
   FETCH_POKEMON_BY_NAME */
 } from "../constants";
@@ -29,6 +30,10 @@ export const fetchPokemonById = payload => ({
   payload 
 });
 
+export const fetchNewPokemon = payload => ({
+  type: CREATE_NEW_POKEMON,
+  payload
+});
 
 /*export const fetchPokemonByName = payload => ({
   type: FETCH_POKEMON_BY_NAME,
