@@ -11,9 +11,11 @@ import AddTypesModal from "../../components/modals/addTypesModal/AddTypesModal";
 import "./pokemonForm.css";
 
 const PokemonForm = ({ createPokemon, getPokemonTypes, newPokemon, pokemonTypes }) => {
-  const { inputAttributes, checkboxLogic, createNewTypesLogic } = PokemonFormLogic();
+
+  const { inputAttributes, checkboxLogic, createNewTypesLogic, newPokemonAttributes, cleanForm } = PokemonFormLogic();
+
   const { openModal, ...modalCheckboxAttributes } = checkboxLogic(); // no tocar!
-  const { openModal: openModalOfNewTypes, ...newTypesModalAttributes } = createNewTypesLogic(); // no tocar!
+  const { checkboxTypes, openModal: openModalOfNewTypes, ...newTypesModalAttributes } = createNewTypesLogic(); // no tocar!
   const inputs = inputAttributes(); // no tocar!
 
   useEffect(() => {
@@ -22,40 +24,41 @@ const PokemonForm = ({ createPokemon, getPokemonTypes, newPokemon, pokemonTypes 
 
   const handleSubmit = event => {
     event.preventDefault();
-    alert("New Pokemon Created");
+    console.log(newPokemonAttributes());
+    cleanForm();
   };
 
   return (
     <form className="create" onSubmit={handleSubmit}>
-      <div>
-        <h1>Create your new Pokemon</h1>
-        <p>Please fill in this form to create a new Pokemon.</p>
-        <hr />
-        {inputs.map((input, index) => <Input key={index} {...input} />)} 
-      </div>
-      
-      <CheckboxModal list={pokemonTypes} {...modalCheckboxAttributes} />
-      <AddTypesModal {...newTypesModalAttributes} />
-      
-      <div className="buttons">
-        <Button
-          onClick={openModalOfNewTypes}
-          buttonSize="btn-medium"
-          buttonStyle="btn--success--solid"
-        >Add New Types</Button>
-        
-        <Button
-          onClick={openModal}
-          buttonSize="btn-medium"
-          buttonStyle="btn--success--solid"
-        >Select Types</Button>
-        
-        <Button
-          type="submit"
-          buttonSize="btn-medium"
-          buttonStyle="btn--success--solid"
-        >Create Pokemon</Button>
-      </div>
+    <div>
+    <h1>Create your new Pokemon</h1>
+    <p>Please fill in this form to create a new Pokemon.</p>
+    <hr />
+    {inputs.map((input, index) => <Input key={index} {...input} />)} 
+    </div>
+
+    <CheckboxModal list={pokemonTypes} {...modalCheckboxAttributes} />
+    <AddTypesModal {...newTypesModalAttributes} />
+
+    <div className="buttons">
+    <Button
+    onClick={openModalOfNewTypes}
+    buttonSize="btn-medium"
+    buttonStyle="btn--success--solid"
+    >Add New Types</Button>
+
+    <Button
+    onClick={openModal}
+    buttonSize="btn-medium"
+    buttonStyle="btn--success--solid"
+    >Select Types</Button>
+
+    <Button
+    type="submit"
+    buttonSize="btn-medium"
+    buttonStyle="btn--success--solid"
+    >Create Pokemon</Button>
+    </div>
     </form>
   );
 };

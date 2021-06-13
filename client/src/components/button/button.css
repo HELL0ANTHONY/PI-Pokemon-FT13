@@ -1,18 +1,18 @@
 :root {
-  --primary: #4628ff;
-  --warning: #ffd028;
   --danger : #eb3f27;
-  --success: #00bb2d;
-  --white  : #fdfdfd;
   --dark   : #181717;
   --gray   : #e7ebda;
+  --primary: #4628ff;
+  --success: #00bb2d;
+  --warning: #ffd028;
+  --white  : #fdfdfd;
 }
 
 .btn {
-  font-family  : "Roboto Mono", "san-serif";
-  font-weight  : 400;
   border-radius: .625rem;
   cursor       : pointer;
+  font-family  : "Roboto Mono", "san-serif";
+  font-weight  : 400;
   transition   : transform 0.3s ease;
 }
 
@@ -23,20 +23,20 @@
 /* Button Colors and Styles */
 .btn--primary--solid {
   background-color: var(--primary);
-  color           : var(--white);
   border          : none;
+  color           : var(--white);
 }
 
 .btn--danger--solid {
   background-color: var(--danger);
-  color           : var(--white);
   border          : none;
+  color           : var(--white);
 }
 
 .btn--success--solid {
   background-color: var(--success);
-  color           : var(--white);
   border          : none;
+  color           : var(--white);
 }
 
 .btn--warning--solid {
@@ -71,17 +71,17 @@
 
 /* Button Sizes */
 .btn--medium {
-  padding  : .625rem 1.25rem;
   font-size: 1.125rem;
+  padding  : .625rem 1.25rem;
 }
 
 .btn--large {
-  padding  : .9375rem 1.875rem;
   font-size: 1.25rem;
+  padding  : .9375rem 1.875rem;
 }
 
 .btn--jumbo {
-  padding       : .9375rem 2.1875rem;
   font-size     : 2.5rem;
   letter-spacing: .125rem;
+  padding       : .9375rem 2.1875rem;
 }

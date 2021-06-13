@@ -9,20 +9,38 @@ export const PokemonFormLogic = () => {
   const [isOpenModalOfTypes, openModalOfTypes, closeModalOfTypes]    = useModal();
   const [isOpenModalNewTypes, openModalNewTypes, closeModalNewTypes] = useModal();
 
-  const handleInput = e => {
-    const { name, value } = e.target;
-    e.preventDefault();
+  return {
+    inputAttributes,
+    checkboxLogic,
+    createNewTypesLogic,
+    newPokemonAttributes,
+    cleanForm
+  };
+
+  function newPokemonAttributes() {
+    const newTypes = newInputs.filter(t => t.trim() && isNaN(t.trim()))
+      .map(t => ({ name: t }));
+    const existingTypes = checkboxTypes.map(type => ({ name: type }));
+    return {
+      ...input, 
+      types: [...existingTypes, ...newTypes] 
+    };
+  }
+
+  function cleanForm() {
+    setCheckboxTypes([]); // el checkbox no cambia porque el checked siempre esta en true, por lo que para que resetear hay que cambiarlo a false.
+    setInput(initialState());
+    setNewInputs([]); 
+  }
+
+  function handleInput(event) {
+    const { name, value } = event.target;
+    event.preventDefault();
     setInput({
       ...input,
       [name]: value
     });
-  };
-
-  return {
-    inputAttributes,
-    checkboxLogic,
-    createNewTypesLogic
-  };
+  }
 
   function createNewTypesLogic() {
     return {
@@ -56,6 +74,7 @@ export const PokemonFormLogic = () => {
 
   function checkboxLogic() {
     return {
+      checkboxTypes,
       name: checkboxTypes,
       title: "Select Pokemon Types",
       isOpen: isOpenModalOfTypes,
