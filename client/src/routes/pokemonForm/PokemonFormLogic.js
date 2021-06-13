@@ -61,7 +61,7 @@ export const PokemonFormLogic = () => {
       },
       removeInput: (event, index) => {
         event.preventDefault();
-        newInputs.slice(index, 1);
+        newInputs.splice(index, 1);
         setNewInputs([...newInputs]);
       },
       setValue: (event, index) => {
