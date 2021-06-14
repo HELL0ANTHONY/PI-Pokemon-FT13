@@ -1,7 +1,7 @@
 import "./cardDetails.css";
 
 const CardDetails = ({ id, name, image, height, weight, types, hp, speed, baseExperience, defense }) => {
-  const pokemonTypes = types.map(({ name }) => name).join(", ");
+  const pokemonTypes = types ? types.map(({ name }) => name).join(", ") : "No Types";
     return (
           <>
             <div className="detail--card">
@@ -28,10 +28,10 @@ const CardDetails = ({ id, name, image, height, weight, types, hp, speed, baseEx
                     <h2>Height</h2>
                     <div>
                       <span>Height</span>
-                      <span>{height || "No detail"}</span>
+                      <span>{height ?? "No detail"}</span>
                       <span>|</span>
                       <span>Weight:</span>
-                      <span>{weight || "No detail"}</span>
+                      <span>{weight ?? "No detail"}</span>
                     </div>
                   </div>
                   <hr />
@@ -39,10 +39,10 @@ const CardDetails = ({ id, name, image, height, weight, types, hp, speed, baseEx
                     <h2>Weight</h2>
                     <div>
                       <span>Hp:</span>
-                      <span>{hp || "No detail"}</span>
+                      <span>{hp ?? "No detail"}</span>
                       <span>|</span>
                       <span>Speed:</span>
-                      <span>{speed || "No detail"}</span>
+                      <span>{speed ?? "No detail"}</span>
                     </div>
                   </div>
                   <hr />
@@ -50,10 +50,10 @@ const CardDetails = ({ id, name, image, height, weight, types, hp, speed, baseEx
                     <h2>Life Span</h2>
                     <div>
                       <span>Defense:</span>
-                      <span>{defense || "No detail"}</span>
+                      <span>{defense ?? "No detail"}</span>
                       <span>|</span>
                       <span>Force:</span>
-                      <span>{baseExperience || "No detail"}</span>
+                      <span>{baseExperience ?? "No detail"}</span>
                     </div>
                   </div>
                 </div>

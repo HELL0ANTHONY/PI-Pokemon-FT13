@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { useModal } from "../../hooks/useModal";
+import { pokemonFormValidation } from "../../validations/pokemonFormValidation";
+
+
 // TODO: Al hacer la validacion tener en cuenta los numeros negativos "no pueden ser permitidos".
-// FIXME: En la api toma 0 (cero) como un valor inexistente.
-// FIXME: EL ERROR ESTA EN EL CARDDETAIL DONDE PONGO "||" EN LUGAR DE "??"
+
 export const PokemonFormLogic = () => {
   const [input, setInput]                 = useState(initialState());
+  const [errors, setErrors]               = useState({});
   const [newInputs, setNewInputs]         = useState([]);
   const [checkboxTypes, setCheckboxTypes] = useState([]);
 
@@ -47,6 +50,7 @@ export const PokemonFormLogic = () => {
       ...input,
       [name]: value
     });
+    setErrors(pokemonFormValidation(input));
   }
 
   function createNewTypesLogic() {
@@ -105,6 +109,8 @@ export const PokemonFormLogic = () => {
     };
   }
 
+  // NOTA: Error (podria ser un booleano con valor inicial false)
+  // Ademas crear una propiedad "mensaje" para c/u de las propiedades.
   function inputAttributes() {
     return [
       {
@@ -113,6 +119,7 @@ export const PokemonFormLogic = () => {
         name: "name",
         value: input.name,
         onChange: handleInput,
+        error: errors.name
       },
       {
         label: "Force:",
@@ -162,6 +169,7 @@ export const PokemonFormLogic = () => {
         name: "image",
         value: input.image,
         onChange: handleInput,
+        error: errors.image
       },
     ];
   }
