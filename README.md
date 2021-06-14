@@ -75,8 +75,8 @@ A continuación, se detallaran los requerimientos mínimos para la aprobación d
 > __IMPORTANTE__: *No se permitirá utilizar librerías externas para aplicar estilos a la aplicación. Tendrán que utilizar CSS con algunas de las opciones que vimos en dicha clase (CSS puro, CSS Modules o Styled Components)*
 
 #### Tecnologías necesarias:
-- [ ] React
-- [ ] Redux
+- [x] React
+- [x] Redux
 - [x] Express
 - [x] Sequelize - Postgres
 
@@ -85,8 +85,8 @@ A continuación, se detallaran los requerimientos mínimos para la aprobación d
 Se debe desarrollar una aplicación de React/Redux que contenga las siguientes pantallas/rutas.
 
 __Pagina inicial__: deben armar una landing page con
-- [ ] Alguna imagen de fondo representativa al proyecto
-- [ ] Botón para ingresar al home (`Ruta principal`)
+- [x] Alguna imagen de fondo representativa al proyecto
+- [x] Botón para ingresar al home (`Ruta principal`)
 
 __Ruta principal__: debe contener
 - [ ] Input de búsqueda para encontrar pokemons por nombre (La búsqueda será exacta, es decir solo encontrará al pokemon si se coloca el nombre completo)
@@ -101,10 +101,10 @@ __Ruta principal__: debe contener
 > __IMPORTANTE__: *Dentro de la Ruta Principal se deben mostrar tanto los pokemones traídos desde la API como así también las de la base de datos. **Por otro lado, si revisan el endpoint que trae todos los pokemones verán que no muestra la información del pokemon sino una URL para hacer un subrequest y obtener los datos de allí. Tendrán que por cada pokemon que van a mostrar hacer otro request a esa URL para obtener su imagen y tipos.*** ***Debido a que esto puede hacer que la búsqueda sea muy lenta limitar el resultado total a 40 pokemons totales.***
 
 __Ruta de detalle de Pokemon__: debe contener
-- [ ] Los campos mostrados en la ruta principal para cada pokemon (imagen, nombre y tipos)
-- [ ] Número de Pokemon (id)
-- [ ] Estadísticas (vida, fuerza, defensa, velocidad)
-- [ ] Altura y peso
+- [x] Los campos mostrados en la ruta principal para cada pokemon (imagen, nombre y tipos)
+- [x] Número de Pokemon (id)
+- [x] Estadísticas (vida, fuerza, defensa, velocidad)
+- [x] Altura y peso
 
 __Ruta de creación__: debe contener
 - [ ] Un formulario __controlado__ con los campos mencionados en el detalle del pokemon

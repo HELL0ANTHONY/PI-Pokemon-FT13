@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 
-const { UUID, STRING, INTEGER } = DataTypes;
+const { UUID, STRING, INTEGER, TEXT } = DataTypes;
 module.exports = sequelize => {
   sequelize.define("pokemon", {
     id: {
@@ -44,7 +44,7 @@ module.exports = sequelize => {
       defaultValue: 0
     },
     image: {
-      type: STRING,
+      type: TEXT,
       allowNull: true
     }
   }, {

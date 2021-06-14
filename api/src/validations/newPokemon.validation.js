@@ -34,9 +34,10 @@ function checkTypes(types) {
 }
 
 function checkStats(object) {
-  for (const [key, value] of Object.entries(object))
+  for (const [key, value] of Object.entries(object)) {
     if (typeof value !== "number")
       errorMessage(`${key} is not a valid value`);
+  }
 }
 
 module.exports = validator;

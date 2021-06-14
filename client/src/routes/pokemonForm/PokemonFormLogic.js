@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useModal } from "../../hooks/useModal";
-
+// TODO: Al hacer la validacion tener en cuenta los numeros negativos "no pueden ser permitidos".
+// FIXME: En la api toma 0 (cero) como un valor inexistente.
+// FIXME: EL ERROR ESTA EN EL CARDDETAIL DONDE PONGO "||" EN LUGAR DE "??"
 export const PokemonFormLogic = () => {
   const [input, setInput]                 = useState(initialState());
   const [newInputs, setNewInputs]         = useState([]);
@@ -18,11 +20,16 @@ export const PokemonFormLogic = () => {
   };
 
   function newPokemonAttributes() {
-    const newTypes = newInputs.filter(t => t.trim() && isNaN(t.trim()))
-      .map(t => ({ name: t }));
+    const { name, image, ...numberValues } = input;
+    const newTypes      = newInputs.filter(t => t.trim() && isNaN(t.trim())).map(t => ({ name: t }));
     const existingTypes = checkboxTypes.map(type => ({ name: type }));
+    const numbers       = Object.fromEntries(
+      Object.entries(numberValues).map(([key, value]) => ([key, +value]))
+    );
     return {
-      ...input, 
+      name, 
+      image,
+      ...numbers,
       types: [...existingTypes, ...newTypes] 
     };
   }
