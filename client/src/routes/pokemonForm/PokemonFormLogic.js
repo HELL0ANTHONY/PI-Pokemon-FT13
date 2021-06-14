@@ -2,9 +2,6 @@ import { useState } from "react";
 import { useModal } from "../../hooks/useModal";
 import { pokemonFormValidation } from "../../validations/pokemonFormValidation";
 
-
-// TODO: Al hacer la validacion tener en cuenta los numeros negativos "no pueden ser permitidos".
-
 export const PokemonFormLogic = () => {
   const [input, setInput]                 = useState(initialState());
   const [errors, setErrors]               = useState({});
@@ -19,7 +16,8 @@ export const PokemonFormLogic = () => {
     checkboxLogic,
     createNewTypesLogic,
     newPokemonAttributes,
-    cleanForm
+    cleanForm,
+    errors
   };
 
   function newPokemonAttributes() {
@@ -109,8 +107,6 @@ export const PokemonFormLogic = () => {
     };
   }
 
-  // NOTA: Error (podria ser un booleano con valor inicial false)
-  // Ademas crear una propiedad "mensaje" para c/u de las propiedades.
   function inputAttributes() {
     return [
       {
@@ -127,6 +123,7 @@ export const PokemonFormLogic = () => {
         name: "baseExperience",
         value: input.baseExperience,
         onChange: handleInput,
+        error: errors.baseExperience
       },
       {
         label: "Hp:",
@@ -134,6 +131,7 @@ export const PokemonFormLogic = () => {
         name: "hp",
         value: input.hp,
         onChange: handleInput,
+        error: errors.hp
       },
       {
         label: "Defense:",
@@ -141,6 +139,7 @@ export const PokemonFormLogic = () => {
         name: "defense",
         value: input.defense,
         onChange: handleInput,
+        error: errors.defense
       },
       {
         label: "Height:",
@@ -148,6 +147,7 @@ export const PokemonFormLogic = () => {
         name: "height",
         value: input.height,
         onChange: handleInput,
+        error: errors.height
       },
       {
         label: "Weight:",
@@ -155,6 +155,7 @@ export const PokemonFormLogic = () => {
         name: "weight",
         value: input.weight,
         onChange: handleInput,
+        error: errors.weight
       },
       {
         label: "Speed:",
@@ -162,6 +163,7 @@ export const PokemonFormLogic = () => {
         name: "speed",
         value: input.speed,
         onChange: handleInput,
+        error: errors.speed
       },
       {
         label: "Image:",
