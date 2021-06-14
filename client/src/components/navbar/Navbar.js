@@ -1,9 +1,26 @@
+import { Link } from "react-router-dom";
+import { NavbarLogic } from "./NavbarLogic";
+import "./navbar.css";
+
 const Navbar = () => {
+  const { showLinks, setShowLinks } = NavbarLogic();
   return (
-    <div>
-      <h1>Navbar</h1>
+    <header className="header">
+    <Link className="link" to='/'><div className="imgBox" /></Link>
+    <div className="navbar">
+    <div className="left-side">
+    <div className="links" id={showLinks ? "hidden" : ""}>
+    <Link className="link" to="/home">Home</Link>
+    <Link className="link" to="/form">Create Dog</Link>
     </div>
+    <button onClick={() => setShowLinks(!showLinks)}>
+    <i className="fas fa-bars" />
+    </button>
+    </div>
+    </div>
+    </header>
   );
+
 };
 
 export default Navbar;
