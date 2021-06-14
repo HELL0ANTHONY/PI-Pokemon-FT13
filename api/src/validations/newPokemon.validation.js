@@ -8,18 +8,6 @@ const errorMessage = message => {
   throw new Error (message);
 };
 
-function validator(data) {
-  const { name, image, types, ...rest } = data;
-  checkTypes(types);
-  checkStats(rest);
-  if (name === undefined || !name.trim())
-    errorMessage("Name is required");
-  if (!regexs.str.test(name.trim()))
-    errorMessage(`${name} is not a valid name`);
-  if (!isNaN(image))
-    errorMessage(`Incorrect value: ${image}`)
-}
-
 function checkTypes(types) {
   if (types === undefined)
     errorMessage("Types is not defined");
@@ -38,6 +26,21 @@ function checkStats(object) {
     if (typeof value !== "number")
       errorMessage(`${key} is not a valid value`);
   }
+}
+
+function validator(data) {
+  const { name, image, types, ...rest } = data;
+
+  checkTypes(types);
+  checkStats(rest);
+
+  if (name === undefined || !name.trim())
+    errorMessage("Name is required");
+  if (!regexs.str.test(name.trim()))
+    errorMessage(`${name} is not a valid name`);
+
+  if (image && !isNaN(image))
+    errorMessage(`Image cannot be a number: ${image}`)
 }
 
 module.exports = validator;

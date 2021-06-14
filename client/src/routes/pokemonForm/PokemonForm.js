@@ -24,7 +24,6 @@ const PokemonForm = ({ createPokemon, getPokemonTypes, newPokemon, pokemonTypes 
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log(newPokemonAttributes());
     createPokemon(newPokemonAttributes());
     cleanForm();
     alert("success!");
@@ -32,35 +31,35 @@ const PokemonForm = ({ createPokemon, getPokemonTypes, newPokemon, pokemonTypes 
 
   return (
     <form className="create" onSubmit={handleSubmit}>
-    <div>
-    <h1>Create your new Pokemon</h1>
-    <p>Please fill in this form to create a new Pokemon.</p>
-    <hr />
-    {inputs.map((input, index) => <Input key={index} {...input} />)} 
-    </div>
-
-    <CheckboxModal list={pokemonTypes} {...modalCheckboxAttributes} />
-    <AddTypesModal {...newTypesModalAttributes} />
-
-    <div className="buttons">
-    <Button
-    onClick={openModalOfNewTypes}
-    buttonSize="btn-medium"
-    buttonStyle="btn--success--solid"
-    >Add New Types</Button>
-
-    <Button
-    onClick={openModal}
-    buttonSize="btn-medium"
-    buttonStyle="btn--success--solid"
-    >Select Types</Button>
-
-    <Button
-    type="submit"
-    buttonSize="btn-medium"
-    buttonStyle="btn--success--solid"
-    >Create Pokemon</Button>
-    </div>
+      <div>
+        <h1>Create your new Pokemon</h1>
+        <p>Please fill in this form to create a new Pokemon.</p>
+        <hr />
+        {inputs.map((input, index) => <Input key={index} {...input} />)} 
+      </div>
+      
+      <CheckboxModal list={pokemonTypes} {...modalCheckboxAttributes} />
+      <AddTypesModal {...newTypesModalAttributes} />
+      
+      <div className="buttons">
+        <Button
+          onClick={openModalOfNewTypes}
+          buttonSize="btn-medium"
+          buttonStyle="btn--success--solid"
+        >Add New Types</Button>
+        
+        <Button
+          onClick={openModal}
+          buttonSize="btn-medium"
+          buttonStyle="btn--success--solid"
+        >Select Types</Button>
+        
+        <Button
+          type="submit"
+          buttonSize="btn-medium"
+          buttonStyle="btn--success--solid"
+        >Create Pokemon</Button>
+      </div>
     </form>
   );
 };
