@@ -26,7 +26,7 @@ async function getPokemons(req, res, next) {
     }
   });
 
-  const NUMBER_OF_REQUESTS_TO_THE_API = 12;
+  const NUMBER_OF_REQUESTS_TO_THE_API = 2;
 
   if (!cache.getLength()) {
     const promises = [...Array(NUMBER_OF_REQUESTS_TO_THE_API).keys()]

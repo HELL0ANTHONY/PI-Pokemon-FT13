@@ -1,10 +1,28 @@
-import { Link } from "react-router-dom";
-import CardLogic from "./CardLogic";
-import "./card.css";
+// import { Link } from "react-router-dom";
+// import CardLogic from "./CardLogic";
+import { Main, CardContainer, Front, Back, Image, Box } from "./Card.styles";
 
 const Card = ({ id, name, image, stats }) => {
-  const { printStats, titleCase } = CardLogic();
+//  const { printStats, titleCase } = CardLogic();
   return (
+    <Main>
+      <CardContainer>
+        <Front>
+          <Box>
+            <Image image={image}/> 
+         </Box> 
+        </Front>
+        <Back>Back</Back>
+      </CardContainer>
+    </Main>
+  );
+};
+
+export default Card;
+
+
+/*
+ * 
     <div className="card">
       <div
         className="cardImage"
@@ -24,7 +42,6 @@ const Card = ({ id, name, image, stats }) => {
         </div>
       </div>
     </div>
-  );
-};
-
-export default Card;
+ *
+ *
+ * */

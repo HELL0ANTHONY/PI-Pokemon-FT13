@@ -107,9 +107,9 @@ __Ruta de detalle de Pokemon__: debe contener
 - [x] Altura y peso
 
 __Ruta de creación__: debe contener
-- [ ] Un formulario __controlado__ con los campos mencionados en el detalle del pokemon
-- [ ] Posibilidad de seleccionar/agregar más de un tipo de pokemon
-- [ ] Botón/Opción para crear un nuevo pokemon
+- [x] Un formulario __controlado__ con los campos mencionados en el detalle del pokemon
+- [x] Posibilidad de seleccionar/agregar más de un tipo de pokemon
+- [x] Botón/Opción para crear un nuevo pokemon
 
 #### Base de datos
 
