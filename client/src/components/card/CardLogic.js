@@ -6,8 +6,7 @@ const CardLogic = _ => {
       return stats
         .map(({ name }) => titleCase(name))
         .join(", ");
-    },
-    titleCase
+    }
   };
 };
 

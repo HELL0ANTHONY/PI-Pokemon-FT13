@@ -1,47 +1,32 @@
-// import { Link } from "react-router-dom";
-// import CardLogic from "./CardLogic";
-import { Main, CardContainer, Front, Back, Image, Box } from "./Card.styles";
+import { Link } from "react-router-dom";
+import { Main, CardContainer, Front, Back, Image, Box, List, Id } from "./Card.styles";
 
-const Card = ({ id, name, image, stats }) => {
-//  const { printStats, titleCase } = CardLogic();
+const Card = ({ id, name, image, types }) => {
   return (
     <Main>
       <CardContainer>
+        
         <Front>
           <Box>
             <Image image={image}/> 
-         </Box> 
+          </Box> 
+          <h1>{name}</h1>
         </Front>
-        <Back>Back</Back>
+        
+        <Back>
+          <h2>{`${name}'s types`}</h2>
+          <Id>
+            <h3> Id: {id}</h3>
+          </Id>
+          <List>
+            {types.map((type, index) => <li key={index}>{type.name}</li>)}
+          </List> 
+          <Link to={`/details/${id}`}>Go to Details</Link>
+        </Back>
+        
       </CardContainer>
     </Main>
   );
 };
 
 export default Card;
-
-
-/*
- * 
-    <div className="card">
-      <div
-        className="cardImage"
-        style={{ backgroundImage: `url(${image})` }}
-      />
-      <div className="cardText">
-        <Link className="link" to={`/details/${id}`}>
-          <h2>{titleCase(name)}</h2>
-        </Link>
-      </div>
-      <div className="cardStats">
-        <div className="stat">
-          <div className="type">Temperaments</div>
-          <div className="value">
-            {printStats(stats)}
-          </div>
-        </div>
-      </div>
-    </div>
- *
- *
- * */
