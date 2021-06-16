@@ -2,6 +2,7 @@ import {
 /*  SORT,
   CHANGE_PAGE,
   CHANGE_ORDER, */
+  GO_TO_PAGE,
   FETCH_ERROR,
   FETCH_PENDING,
   FETCH_POKEMONS,
@@ -12,16 +13,17 @@ import {
 } from "../constants";
 
 const initialState = {
-  pending: false,
   error: null,
+  pending: false,
   pokemons: undefined,
-  pokemonTypes: undefined,
-  pokemonById: undefined,
   newPokemon: undefined,
+  currentPage: 1,
+  pokemonById: undefined,
+  pokemonTypes: undefined,
   /**  pokemonByName: undefined,
   sort: "default",
   order: "",
-  page: 1, */
+ */
 };
 
 export function rootReducer(state = initialState, { type, payload, error }) {
@@ -60,6 +62,11 @@ export function rootReducer(state = initialState, { type, payload, error }) {
         ...state,
         pending: false,
         pokemonTypes: payload
+      }
+    case GO_TO_PAGE:
+      return {
+        ...state,
+        currentPage: payload
       }
     default: 
       return state;

@@ -1,7 +1,7 @@
 import {
   /*  SORT,
-  CHANGE_PAGE,
   CHANGE_ORDER, */
+  GO_TO_PAGE,
   FETCH_ERROR,
   FETCH_PENDING, 
   FETCH_POKEMONS,
@@ -15,6 +15,12 @@ import {
 // que comience con 1. Y luego tener dos acciones 'increment and dicrement' para cambiar
 // su valor sumando o restando (previous and next). Ademas una accion que modifique
 // el valor dependiendo del numero de la pagina que sea el boton (goto).
+
+export const goToPage = payload => ({
+  type: GO_TO_PAGE,
+  payload
+});
+
 export const fetchPending = _ => ({
   type: FETCH_PENDING
 });

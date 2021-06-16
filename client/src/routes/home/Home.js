@@ -1,17 +1,15 @@
-import { useEffect, useState } from "react"; 
+import { useEffect } from "react"; 
 import { connect } from "react-redux";
 import fetchPokemons from "../../redux/reducers/fetchPokemons";
+import { goToPage } from "../../redux/actions/actions";
 
 import { HomeStyles } from "./Home.styles.js";
 import { printCards } from "../../helpers/printCards";
-import Pagination from "../../components/pagination/Pagination";
+import Pagination from "../../components/pagination/Pagination"; 
 
-import "./home.css";
-
-const Home = ({ fetchPokemons, pokemons }) => { 
+const Home = ({ fetchPokemons, goToPage, pokemons, currentPage }) => { 
   const totalPages = pokemons?.paginationData.totalPages;
-  const [currentPage, setCurrentPage] = useState(1);
-  const paginate = pageNumber => setCurrentPage(pageNumber);
+  const paginate   = pageNumber => goToPage(pageNumber);
 
   useEffect(() => {
     fetchPokemons(currentPage);
@@ -32,12 +30,14 @@ const Home = ({ fetchPokemons, pokemons }) => {
   ); 
 };
 
-const mapStateToProps = ({ pokemons }) => ({
+const mapStateToProps = ({ pokemons, currentPage }) => ({
+  currentPage,
   pokemons
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchPokemons: (page, sort, order) => dispatch(fetchPokemons(page, sort, order))
+  fetchPokemons: (page, sort, order) => dispatch(fetchPokemons(page, sort, order)),
+  goToPage: number => dispatch(goToPage(number))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
