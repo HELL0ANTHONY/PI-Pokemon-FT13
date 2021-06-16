@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import { Main, CardContainer, Front, Back, Image, Box, List, Id } from "./Card.styles";
 
-const Card = ({ id, name, image, types }) => {
+const Card = ({ id, name, image, types }) => { 
+  const sliceId = id => id.slice(0, 8).concat("...");
+
   return (
     <Main>
       <CardContainer>
@@ -15,7 +17,7 @@ const Card = ({ id, name, image, types }) => {
         
         <Back>
           <Id>
-            <h3> Id: {id}</h3>
+            <h3> Id: {typeof id === "number" ? id : sliceId(id)}</h3>
           </Id>
           <h2>{`${name}'s types`}</h2>
           <List>
