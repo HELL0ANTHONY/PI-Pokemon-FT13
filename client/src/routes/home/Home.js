@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { printCards } from "../../helpers/printCards";
+import { HomeStyles } from "./Home.styles.js";
 
 import { connect } from "react-redux";
 import fetchPokemons from "../../redux/reducers/fetchPokemons";
@@ -12,13 +13,13 @@ const Home = ({ fetchPokemons, pokemons }) => {
   }, [fetchPokemons]); 
 
   return (
-    <div>
+    <HomeStyles>
       {
         pokemons?.data 
           ? printCards(pokemons.data) 
           : <h1>Loading...</h1>
       }
-    </div>
+    </HomeStyles>
   ); 
 };
 

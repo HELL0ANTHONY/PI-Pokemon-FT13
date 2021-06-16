@@ -90,8 +90,7 @@ export const Back = styled(Front)`
     display: inline-block;
     text-decoration: none;
     text-align: center;
-    margin-top: 5px;
-    margin-right: 40px;
+    margin-top: 10px;
     border: 1px solid ${colors.cinc};
     padding: 7px;
     border-radius: 4px;
