@@ -1,19 +1,11 @@
 import styled from "styled-components";
+import { flex } from "../../elements/flex.style.js";
 
 const colors = {
   front: "#F9E79F",
   back: "#2e2956",
   orange: "#ff6b00",
   cinc: "#fafbfd"
-};
-
-const flex = (align, justify, direction = "row") => {
-  return `
-    display: flex;
-    flex-direction: ${direction}; 
-    align-items: ${align};
-    justify-content: ${justify};
-  `;
 };
 
 const commonStyles = (width, height, radius = 0, position = "static") => {
@@ -35,7 +27,7 @@ export const CardContainer = styled.div`
   transform-style: preserve-3d;
   transition: transform 1.5s ease;
 
-  :hover {
+  &:hover {
     transform: rotateY(180deg);
   }
 `;
@@ -96,7 +88,7 @@ export const Back = styled(Front)`
     border-radius: 4px;
     transition: background 1s ease;
     
-    :hover {
+    &:hover {
       background: ${colors.orange};
     }
   } 
@@ -105,6 +97,7 @@ export const Back = styled(Front)`
 export const Id = styled.div` 
   ${flex("center", "flex-start", "row")}; 
     width: 100%;
+    padding: 20px;
     
     h3 {
       padding: auto;

@@ -1,0 +1,34 @@
+import styled from "styled-components";
+import { flex } from "../../elements/flex.style.js";
+
+export const PaginationBox = styled.div`
+  ${flex("center", "center")};  
+  color: white;
+  width: 100%;
+`;
+
+export const PaginationList = styled.ul`
+  ${flex("center", "space-evenly")};
+  padding: 10px;
+  width: 60%;
+
+  li {
+    ${flex("center", "center")};
+    width: 45px;
+    height: 30px;
+    margin: 5px;
+    list-style: none;
+    border: 1px solid #a9aac6;
+    border-radius: 5px;
+  }
+`;
+
+export const PageButton = styled.button`
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+
+  &:hover {
+    background: orange;
+  }
+`; 

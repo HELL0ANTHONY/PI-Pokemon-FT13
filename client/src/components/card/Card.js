@@ -14,10 +14,10 @@ const Card = ({ id, name, image, types }) => {
         </Front>
         
         <Back>
-          <h2>{`${name}'s types`}</h2>
           <Id>
             <h3> Id: {id}</h3>
           </Id>
+          <h2>{`${name}'s types`}</h2>
           <List>
             {types.map((type, index) => <li key={index}>{type.name}</li>)}
           </List> 
