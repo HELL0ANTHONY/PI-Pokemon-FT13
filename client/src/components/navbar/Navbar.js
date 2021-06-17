@@ -13,7 +13,7 @@ const Navbar = () => {
         <div className="left-side">
           <div className="links" id={showLinks ? "hidden" : ""}>
             <Link className="link" to="/home">Home</Link>
-            <Link className="link" to="/form">Create Dog</Link>
+            <Link className="link" to="/form">New Pokemon</Link>
           </div>
           <button onClick={() => setShowLinks(!showLinks)}>
             <i className="fas fa-bars" />

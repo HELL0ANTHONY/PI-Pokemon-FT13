@@ -8,16 +8,37 @@ import CardsWithPagination from "../../components/cardsWithPagination/CardsWithP
 
 // import { HomeStyles } from "./Home.styles.js";
 
-
 const Home = ({ searchPokemonByName, pokemons }) => { 
   const { modalSearchAttributes } = HomeLogic();
-  const { openModal, ...rest } = modalSearchAttributes();
+  const { 
+    openModal,
+    closeModal: closeModalSearch,
+    value: pokemonName,
+    ...rest
+  } = modalSearchAttributes();
 
+  const handleSearch = event => {
+    const name = pokemonName.trim();
+    if (name) {
+      event.preventDefault();
+      searchPokemonByName(name.toLowerCase());
+      closeModalSearch(event);
+    } 
+    else closeModalSearch(event);
+  };
+  useKey("Enter", handleSearch);
 
   return (
     <>
       <CardsWithPagination />  
       
+      <SearchModal 
+        value={pokemonName}
+        closeModal={closeModalSearch}
+        onSubmit={handleSearch}
+        {...rest} 
+      />
+
       <div className="search-btn btn-modal-position">
         <button type="submit" onClick={openModal} >
           <i className="fas fa-search" />
@@ -36,11 +57,3 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
-
-/*
- *
-        <button onClick={() => console.log("esto era para el filtro")}>
-          <i className="fas fa-filter"></i>
-        </button>
- *
- * */

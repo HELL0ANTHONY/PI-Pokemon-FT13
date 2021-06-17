@@ -21,6 +21,7 @@ const HomeLogic = () => {
       closeModal: event => {
         event.preventDefault();
         closeSearchModal();
+        setSearchByName("");
       },
       onChange: event => {
         event.preventDefault();
