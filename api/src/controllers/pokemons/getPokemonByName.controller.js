@@ -1,6 +1,5 @@
 const { Op }                      = require("sequelize");
 const pokeApi                     = require("./getPokemonFromTheApi");
-const { isNumeric }               = require("../../helper/isNumeric");
 const { Pokemon, Type }           = require("../../db");
 const { pokemonByName: endpoint } = require("../../constants");
 
@@ -8,7 +7,7 @@ async function getPokemonByName(req, res, next) {
   const name    = req.query.name;
   let   pokemon = [];
 
-  if (!req.query?.name || !name.trim() || isNumeric(name))
+  if (!req.query?.name || !name.trim() || !isNaN(name))
     throw new Error("Invalid Parameters");
 
   pokemon = await pokeApi(endpoint(name));

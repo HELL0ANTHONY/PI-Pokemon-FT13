@@ -26,7 +26,7 @@ async function getPokemons(req, res, next) {
     }
   });
 
-  const NUMBER_OF_REQUESTS_TO_THE_API = 2;
+  const NUMBER_OF_REQUESTS_TO_THE_API = 50;
 
   if (!cache.getLength()) {
     const promises = [...Array(NUMBER_OF_REQUESTS_TO_THE_API).keys()]
@@ -47,12 +47,11 @@ async function getPokemons(req, res, next) {
   const data           = pokemons.slice(startIndex, endIndex);
   const paginationData = { rows: data.length, ...rest };
 
-  // sortPokemons
   if(sort !== undefined && sort && sort !== "default") {
     const sorted = (sort === "name")
       ? sortPokemons().byName(data, order)
       : sortPokemons().byForce(data, order);
-
+    
     return res.json({
       paginationData,
       data: sorted
