@@ -1,6 +1,5 @@
 import {
-  /*  SORT,
-  CHANGE_ORDER, */
+  /*  SORT, */
   GO_TO_PAGE,
   FETCH_ERROR,
   FETCH_PENDING, 
@@ -8,13 +7,8 @@ import {
   CREATE_NEW_POKEMON,
   FETCH_POKEMON_TYPES,
   FETCH_POKEMON_BY_ID,
-  /* FETCH_POKEMON_BY_NAME */
+  FETCH_POKEMON_BY_NAME
 } from "../constants";
-
-// la idea con la paginacion es tener PAGE (estado inicial) que va a ser un valor numerico
-// que comience con 1. Y luego tener dos acciones 'increment and dicrement' para cambiar
-// su valor sumando o restando (previous and next). Ademas una accion que modifique
-// el valor dependiendo del numero de la pagina que sea el boton (goto).
 
 export const goToPage = payload => ({
   type: GO_TO_PAGE,
@@ -50,11 +44,12 @@ export const fetchPokemonTypes = payload => ({
   payload
 }); 
 
-/*export const fetchPokemonByName = payload => ({
+export const fetchPokemonByName = payload => ({
   type: FETCH_POKEMON_BY_NAME,
   payload
 }); 
 
+/*
 const sort = payload => ({
   type: SORT,
   payload

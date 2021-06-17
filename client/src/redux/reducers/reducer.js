@@ -1,5 +1,5 @@
 import {
-/*  SORT,
+  /*  SORT,
   CHANGE_PAGE,
   CHANGE_ORDER, */
   GO_TO_PAGE,
@@ -9,7 +9,7 @@ import {
   CREATE_NEW_POKEMON,
   FETCH_POKEMON_BY_ID,
   FETCH_POKEMON_TYPES,
-  /* FETCH_POKEMON_BY_NAME */
+  FETCH_POKEMON_BY_NAME
 } from "../constants";
 
 const initialState = {
@@ -19,11 +19,10 @@ const initialState = {
   newPokemon: undefined,
   currentPage: 1,
   pokemonById: undefined,
-  pokemonTypes: undefined,
-  /**  pokemonByName: undefined,
-  sort: "default",
+  pokemonTypes: undefined
+  /** sort: "default",
   order: "",
- */
+  */
 };
 
 export function rootReducer(state = initialState, { type, payload, error }) {
@@ -67,6 +66,12 @@ export function rootReducer(state = initialState, { type, payload, error }) {
       return {
         ...state,
         currentPage: payload
+      }
+    case FETCH_POKEMON_BY_NAME:
+      return {
+        ...state,
+        pending: false,
+        pokemons: payload
       }
     default: 
       return state;
