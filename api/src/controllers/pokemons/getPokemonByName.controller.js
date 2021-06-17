@@ -9,12 +9,12 @@ async function getPokemonByName(req, res, next) {
 
   if (!req.query?.name || !name.trim() || !isNaN(name))
     throw new Error("Invalid Parameters");
-
-  pokemon = await pokeApi(endpoint(name));
+  
+  pokemon = await pokeApi(endpoint(name.toLowerCase()));
   const pokemonFromDB = await Pokemon.findAll({
     where: {
       name: {
-        [Op.like]: name
+        [Op.like]: name.toLowerCase()
       }
     },
     include: {
