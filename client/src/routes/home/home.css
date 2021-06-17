@@ -1,1 +1,61 @@
+.wrapper {
+  display        : flex;
+  align-items    : center;
+  justify-content: center;
+  flex-wrap      : wrap;
+  width          : 100vw;
+  min-height     : 180vh;
+  max-height     : 800vh;
+  background-size: cover;
+  overflow       : hidden;
+}
 
+.btn-modal-position {
+  position: absolute;
+  top     : 20px;
+  right   : 100px;
+}
+
+.btn-modal-position button {
+  margin: 5px;
+}
+
+.btn--filter,
+.filter--title {
+  display        : flex;
+  justify-content: center;
+  align-items    : center;
+  margin-top     : 20px;
+}
+
+.filter--form {
+  display        : flex;
+  flex-direction : column;
+  align-items    : center;
+  justify-content: center;
+}
+
+.input--select {
+  display        : flex;
+  align-items    : center;
+  justify-content: center;
+}
+
+.input--select select,
+.filter--input {
+  padding    : 8px 12px;
+  margin     : 10px 0;
+  border     : 1px solid #ddd;
+  box-sizing : border-box;
+  display    : inline;
+  font-family: "Arial";
+}
+
+.input--select select {
+  width      : 40%;
+  margin-left: 10px;
+}
+
+.filter--input {
+  width: 60%;
+}

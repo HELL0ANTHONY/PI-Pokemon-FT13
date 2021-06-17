@@ -1,4 +1,4 @@
-export const SORT                  = "SORT";
+export const SORT_BY               = "SORT_BY";
 export const FETCH_ERROR           = "FETCH_ERROR";
 export const CHANGE_ORDER          = "CHANGE_ORDER";
 export const FETCH_PENDING         = "FETCH_PENDING";

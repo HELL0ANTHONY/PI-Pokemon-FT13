@@ -7,13 +7,13 @@ import Pagination from "../pagination/Pagination";
 import { printCards } from "../../helpers/printCards";
 import { Cards } from "./CardsWithPagination.styles.js";
 
-const CardsWithPagination = ({ fetchPokemons, goToPage, pokemons, currentPage }) => {
+const CardsWithPagination = ({ fetchPokemons, goToPage, pokemons, currentPage, sortBy }) => {
   const totalPages = pokemons?.paginationData?.totalPages;
   const paginate   = pageNumber => goToPage(pageNumber);
 
   useEffect(() => {
-    fetchPokemons(currentPage);
-  }, [fetchPokemons, currentPage]); 
+    fetchPokemons(currentPage, sortBy, "asc");
+  }, [fetchPokemons, currentPage, sortBy]); 
 
   return (
     <>
@@ -30,9 +30,10 @@ const CardsWithPagination = ({ fetchPokemons, goToPage, pokemons, currentPage })
   );
 };
 
-const mapStateToProps = ({ pokemons, currentPage }) => ({
+const mapStateToProps = ({ pokemons, currentPage, sortBy }) => ({
   currentPage,
-  pokemons
+  pokemons,
+  sortBy
 });
 
 const mapDispatchToProps = dispatch => ({

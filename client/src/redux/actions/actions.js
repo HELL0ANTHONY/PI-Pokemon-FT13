@@ -1,5 +1,5 @@
 import {
-  /*  SORT, */
+  SORT_BY,
   GO_TO_PAGE,
   FETCH_ERROR,
   FETCH_PENDING, 
@@ -12,6 +12,11 @@ import {
 
 export const goToPage = payload => ({
   type: GO_TO_PAGE,
+  payload
+});
+
+export const setSortBy = payload => ({
+  type: SORT_BY,
   payload
 });
 
@@ -50,10 +55,6 @@ export const fetchPokemonByName = payload => ({
 }); 
 
 /*
-const sort = payload => ({
-  type: SORT,
-  payload
-});
 
 const changeOrder = payload => ({
   type: CHANGE_ORDER,
