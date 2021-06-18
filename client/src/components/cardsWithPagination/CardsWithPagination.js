@@ -15,9 +15,10 @@ const CardsWithPagination = ({ fetchPokemons, goToPage, pokemons, currentPage, s
     fetchPokemons(currentPage, sortBy, "asc");
   }, [fetchPokemons, currentPage, sortBy]); 
 
+const printPagination = _ => totalPages && totalPages > 1;
   return (
     <>
-      {totalPages && <Pagination totalPages={totalPages} paginate={paginate} />}
+      {printPagination() && <Pagination totalPages={totalPages} paginate={paginate} />}
       <Cards>
         {
           pokemons?.data 
@@ -25,7 +26,7 @@ const CardsWithPagination = ({ fetchPokemons, goToPage, pokemons, currentPage, s
             : <h1>Loading...</h1>
         }
       </Cards>
-      {totalPages && <Pagination totalPages={totalPages} paginate={paginate} />}
+      {printPagination() && <Pagination totalPages={totalPages} paginate={paginate} />}
     </>
   );
 };

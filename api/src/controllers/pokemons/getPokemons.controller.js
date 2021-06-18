@@ -2,7 +2,6 @@ const Sort                        = require("./Sort");
 const Cache                       = require("./Cache");
 const fetchData                   = require("../../helper/fetchData"); 
 const pagination                  = require("./pagination");
-const sortPokemons                = require("./sortPokemons.js");
 const { Pokemon, Type }           = require("../../db");
 const { pokemonById: endpoint }   = require("../../constants");
 const { filteringAndSortingData } = require("../../helper/filteringAndSortingData");
@@ -17,7 +16,7 @@ async function getPokemons(req, res, next) {
 
   if (Number.isNaN(page)) throw new Error("'Page' is not a number");
 
-  const NUMBER_OF_REQUESTS_TO_THE_API = 12;
+  const NUMBER_OF_REQUESTS_TO_THE_API = 30;
 
   if (!cache.getLength()) {
     const promises = [...Array(NUMBER_OF_REQUESTS_TO_THE_API + 1).keys()]

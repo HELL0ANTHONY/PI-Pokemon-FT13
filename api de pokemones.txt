@@ -27,7 +27,7 @@ Estos son los datos de los pokemones utilizando el endpoint 1.
 - * Altura (heigth:number)
 - * Peso (weight: number)
 - * image se encuentra en sprites
-- tipos: 
+- tipos:
 
 Nota: Para llegar a los detalles del pokemon en particular
 Pasos para llegar a los detalles:
@@ -46,19 +46,3 @@ http://localhost:3001/pokemon?name=pokemon (por nombre)
 http://localhost:3001/pokemons?page=1 (paginado)
 http://localhost:3001/pokemons?page=1&sort=name&order=asc (ordenamiento)
 http://localhost:3001/types (types de los pokemons)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
