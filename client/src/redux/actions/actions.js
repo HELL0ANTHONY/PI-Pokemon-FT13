@@ -2,6 +2,7 @@ import {
   SORT_BY,
   GO_TO_PAGE,
   FETCH_ERROR,
+  CHANGE_ORDER,
   FETCH_PENDING, 
   FETCH_POKEMONS,
   CREATE_NEW_POKEMON,
@@ -10,6 +11,11 @@ import {
   FETCH_POKEMON_BY_NAME
 } from "../constants";
 
+export const changeOrder = payload => ({
+  type: CHANGE_ORDER,
+  payload
+});
+  
 export const goToPage = payload => ({
   type: GO_TO_PAGE,
   payload
@@ -54,9 +60,3 @@ export const fetchPokemonByName = payload => ({
   payload
 }); 
 
-/*
-
-const changeOrder = payload => ({
-  type: CHANGE_ORDER,
-  payload
-}); */

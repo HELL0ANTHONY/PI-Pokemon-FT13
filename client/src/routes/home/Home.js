@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { useKey } from "../../hooks/useKey";
 import fetchPokemonByName from "../../redux/reducers/fetchPokemonByName";
-import { setSortBy } from "../../redux/actions/actions";
+import { setSortBy, changeOrder } from "../../redux/actions/actions";
 
 import HomeLogic from "./HomeLogic";
 import SearchModal from "../../components/modals/modalSearch/SearchModal";
@@ -10,8 +10,10 @@ import Select from "../../components/Select";
 
 // import { HomeStyles } from "./Home.styles.js";
 import "./home.css";
-const Home = ({ searchPokemonByName, setCardsOrder, pokemons, sortBy }) => { 
+
+const Home = ({ searchPokemonByName, setCardsOrder, changeOrder, pokemons, sortBy, order }) => { 
   const { modalSearchAttributes } = HomeLogic();
+
   const { 
     openModal,
     closeModal: closeModalSearch,
@@ -33,6 +35,8 @@ const Home = ({ searchPokemonByName, setCardsOrder, pokemons, sortBy }) => {
 // Botones/Opciones para ordenar tanto ascendentemente 
   //como descendentemente los pokemons por orden alfabético y por fuerza
   // http://localhost:3001/pokemons?page=1&sort=name&order=asc
+changeOrder("desc")
+console.log({order});
 
   const handleSortOption = event => {
     event.preventDefault();
@@ -55,7 +59,7 @@ const Home = ({ searchPokemonByName, setCardsOrder, pokemons, sortBy }) => {
         onSubmit={handleSearch}
         {...rest} 
       />
-
+      
       <div className="search-btn btn-modal-position">
         <button type="submit" onClick={openModal} >
           <i className="fas fa-search" />
@@ -65,14 +69,16 @@ const Home = ({ searchPokemonByName, setCardsOrder, pokemons, sortBy }) => {
   ); 
 };
 
-const mapStateToProps = ({ pokemons, sortBy }) => ({
+const mapStateToProps = ({ pokemons, sortBy, order }) => ({
   pokemons,
-  sortBy
+  sortBy,
+  order
 });
 
 const mapDispatchToProps = dispatch => ({
   searchPokemonByName: string => dispatch(fetchPokemonByName(string)),
-  setCardsOrder: string => dispatch(setSortBy(string))
+  setCardsOrder: string => dispatch(setSortBy(string)),
+  changeOrder: string => dispatch(changeOrder(string))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
