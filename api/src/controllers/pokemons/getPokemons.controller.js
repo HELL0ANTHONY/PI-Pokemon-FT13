@@ -9,14 +9,15 @@ const { filteringAndSortingData } = require("../../helper/filteringAndSortingDat
 const cache = new Cache();
 
 async function getPokemons(req, res, next) {
-  const LIMIT = 12;
-  const page  = Number.parseInt(req.query.page);
-  const sort  = req.query.sort?.trim();
-  const order = req.query.order?.trim();
+  const LIMIT  = 12;
+  const page   = Number.parseInt(req.query.page);
+  const sort   = req.query.sort?.trim();
+  const order  = req.query.order?.trim();
+  const filter = req.query.filter?.trim();
 
   if (Number.isNaN(page)) throw new Error("'Page' is not a number");
 
-  const NUMBER_OF_REQUESTS_TO_THE_API = 30;
+  const NUMBER_OF_REQUESTS_TO_THE_API = 8;
 
   if (!cache.getLength()) {
     const promises = [...Array(NUMBER_OF_REQUESTS_TO_THE_API + 1).keys()]
@@ -36,9 +37,13 @@ async function getPokemons(req, res, next) {
     }
   });
 
-  const pokemons     = [...pokemonsFromTheDB, ...cache.getValues()];
-  let pokemonsSorted = [];
+  let pokemons = [];
+  if (filter !== undefined && filter && filter !== "all" ) {
+    pokemons = [...pokemonsFromTheDB, ...cache.getValues()]
+      .filter(({ types }) => types.some(({ name }) => name === filter))
+  } else pokemons = [...pokemonsFromTheDB, ...cache.getValues()];
 
+  let pokemonsSorted = [];
   if(sort !== undefined && sort && sort !== "default") {
     pokemonsSorted = (sort === "name")
       ? Sort.byName(pokemons, order)
@@ -48,7 +53,7 @@ async function getPokemons(req, res, next) {
   const pageConfig = pagination(page, LIMIT, pokemonsSorted);
   const { startIndex, endIndex, ...rest } = pageConfig;
 
-  if ((page <= 0) || (page > rest.totalPages))
+  if ((page <= 0) && rest.totalPages < page)
     throw new Error("The page you are requesting does not exists");
 
   const data           = pokemonsSorted.slice(startIndex, endIndex);
