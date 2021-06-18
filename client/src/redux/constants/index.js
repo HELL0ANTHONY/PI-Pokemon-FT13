@@ -7,4 +7,5 @@ export const CREATE_NEW_POKEMON    = "CREATE_NEW_POKEMON";
 export const FETCH_POKEMON_BY_ID   = "FETCH_POKEMON_BY_ID";
 export const FETCH_POKEMON_TYPES   = "FETCH_POKEMON_TYPES";
 export const FETCH_POKEMON_BY_NAME = "FETCH_POKEMON_BY_NAME";
+export const FILTER_BY_TYPE        = "FILTER_BY_TYPE";
 export const GO_TO_PAGE            = "GO_TO_PAGE";

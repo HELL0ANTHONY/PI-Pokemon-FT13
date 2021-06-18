@@ -1,8 +1,9 @@
 import { titleCase } from "../helpers/titleCase"; 
+import { SelectStyles } from "./Select.styles.js";
 
 const Select = ({initialValue, onChange, values}) => {
   return (
-    <select value={initialValue} onChange={onChange}>
+    <SelectStyles value={initialValue} onChange={onChange}>
       {
         values.map((value, index) => 
           <option 
@@ -13,7 +14,7 @@ const Select = ({initialValue, onChange, values}) => {
           </option>
         )
       }
-    </select>
+    </SelectStyles>
   );
 };
 

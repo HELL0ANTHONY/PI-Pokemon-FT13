@@ -5,11 +5,17 @@ import {
   CHANGE_ORDER,
   FETCH_PENDING, 
   FETCH_POKEMONS,
+  FILTER_BY_TYPE,
   CREATE_NEW_POKEMON,
   FETCH_POKEMON_TYPES,
   FETCH_POKEMON_BY_ID,
   FETCH_POKEMON_BY_NAME
 } from "../constants";
+
+export const filterByType = payload => ({
+  type: FILTER_BY_TYPE,
+  payload
+});
 
 export const changeOrder = payload => ({
   type: CHANGE_ORDER,

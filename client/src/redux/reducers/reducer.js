@@ -5,6 +5,7 @@ import {
   CHANGE_ORDER,
   FETCH_PENDING,
   FETCH_POKEMONS,
+  FILTER_BY_TYPE,
   CREATE_NEW_POKEMON,
   FETCH_POKEMON_BY_ID,
   FETCH_POKEMON_TYPES,
@@ -14,6 +15,7 @@ import {
 const initialState = {
   error: null,
   order: "asc",
+  filter: "all",
   sortBy: "default",
   pending: false,
   pokemons: undefined,
@@ -80,6 +82,11 @@ export function rootReducer(state = initialState, { type, payload, error }) {
       return {
         ...state,
         order: payload
+      }
+    case FILTER_BY_TYPE:
+      return {
+        ...state,
+        filter: payload
       }
     default: 
       return state;
