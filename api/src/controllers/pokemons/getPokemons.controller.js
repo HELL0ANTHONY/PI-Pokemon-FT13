@@ -16,6 +16,16 @@ async function getPokemons(req, res, next) {
 
   if (Number.isNaN(page)) throw new Error("'Page' is not a number");
 
+  const NUMBER_OF_REQUESTS_TO_THE_API = 12;
+
+  if (!cache.getLength()) {
+    const promises = [...Array(NUMBER_OF_REQUESTS_TO_THE_API + 1).keys()]
+      .slice(1).map(id => fetchData(endpoint(id)));
+    const listOfPokemons     = await Promise.all(promises);
+    const pokemonsFromTheApi = filteringAndSortingData(listOfPokemons);
+    cache.setValue(pokemonsFromTheApi);
+  } 
+
   const pokemonsFromTheDB = await Pokemon.findAll({
     include: {
       model: Type,
@@ -26,37 +36,23 @@ async function getPokemons(req, res, next) {
     }
   });
 
-  const NUMBER_OF_REQUESTS_TO_THE_API = 50;
+  const pokemons     = [...pokemonsFromTheDB, ...cache.getValues()];
+  let pokemonsSorted = [];
 
-  if (!cache.getLength()) {
-    const promises = [...Array(NUMBER_OF_REQUESTS_TO_THE_API).keys()]
-      .slice(1).map(id => fetchData(endpoint(id)));
-    const listOfPokemons     = await Promise.all(promises);
-    const pokemonsFromTheApi = filteringAndSortingData(listOfPokemons);
-    cache.setValue(pokemonsFromTheApi);
-  } 
+  if(sort !== undefined && sort && sort !== "default") {
+    pokemonsSorted = (sort === "name")
+      ? sortPokemons().byName(pokemons, order)
+      : sortPokemons().byForce(pokemons, order);
+  } else pokemonsSorted = [...pokemons];
 
-  const pokemons   = [...pokemonsFromTheDB, ...cache.getValues()];
-  const pageConfig = pagination(page, LIMIT, pokemons);
-
+  const pageConfig = pagination(page, LIMIT, pokemonsSorted);
   const { startIndex, endIndex, ...rest } = pageConfig;
 
   if ((page <= 0) || (page > rest.totalPages))
     throw new Error("The page you are requesting does not exists");
 
-  const data           = pokemons.slice(startIndex, endIndex);
+  const data           = pokemonsSorted.slice(startIndex, endIndex);
   const paginationData = { rows: data.length, ...rest };
-
-  if(sort !== undefined && sort && sort !== "default") {
-    const sorted = (sort === "name")
-      ? sortPokemons().byName(data, order)
-      : sortPokemons().byForce(data, order);
-    
-    return res.json({
-      paginationData,
-      data: sorted
-    }); 
-  }
 
   return res.json({
     paginationData,

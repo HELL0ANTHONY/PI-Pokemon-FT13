@@ -13,7 +13,7 @@ function sortPokemons() {
         ? array.sort(compare) 
         : array.sort((a, b) => compare(b, a));
     },
-
+    
     byForce(array, order){
       return order === "asc"
         ? array.sort(compareByForce)
