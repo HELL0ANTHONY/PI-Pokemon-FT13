@@ -1,3 +1,4 @@
+const Sort                        = require("./Sort");
 const Cache                       = require("./Cache");
 const fetchData                   = require("../../helper/fetchData"); 
 const pagination                  = require("./pagination");
@@ -41,8 +42,8 @@ async function getPokemons(req, res, next) {
 
   if(sort !== undefined && sort && sort !== "default") {
     pokemonsSorted = (sort === "name")
-      ? sortPokemons().byName(pokemons, order)
-      : sortPokemons().byForce(pokemons, order);
+      ? Sort.byName(pokemons, order)
+      : Sort.byForce(pokemons, order);
   } else pokemonsSorted = [...pokemons];
 
   const pageConfig = pagination(page, LIMIT, pokemonsSorted);
