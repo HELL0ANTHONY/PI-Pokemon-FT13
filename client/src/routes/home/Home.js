@@ -32,11 +32,10 @@ const Home = ({ searchPokemonByName, setCardsOrder, changeOrder, pokemons, sortB
   };
   useKey("Enter", handleSearch);
 
-// Botones/Opciones para ordenar tanto ascendentemente 
-  //como descendentemente los pokemons por orden alfabético y por fuerza
-  // http://localhost:3001/pokemons?page=1&sort=name&order=asc
-changeOrder("desc")
-console.log({order});
+  const handleOrder = event => {
+    event.preventDefault();
+    changeOrder(event.target.value);
+  };
 
   const handleSortOption = event => {
     event.preventDefault();
@@ -49,6 +48,12 @@ console.log({order});
         initialValue={sortBy}
         onChange={handleSortOption}
         values={["default", "name", "force"]}
+      />
+      
+      <Select 
+        initialValue={order}
+        onChange={handleOrder}
+        values={["asc", "desc"]}
       />
       
       <CardsWithPagination />  
