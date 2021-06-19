@@ -9,11 +9,11 @@ export const Cards = styled.div`
   align-content: center;
 
   .no-pokemon {
-    width: 800px;
-    height: 300px;
+    width: 100vw;
+    height: 100vh;
     display: flex; 
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     font-family: "Roboto Mono";
   }

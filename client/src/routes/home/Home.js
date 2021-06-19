@@ -10,8 +10,7 @@ import SearchModal from "../../components/modals/modalSearch/SearchModal";
 import CardsWithPagination from "../../components/cardsWithPagination/CardsWithPagination";
 import Select from "../../components/Select";
 
-// import { HomeStyles } from "./Home.styles.js";
-import "./home.css";
+import { Selects } from "./Home.styles.js";
 
 const Home = ({ 
   searchPokemonByName, 
@@ -26,6 +25,7 @@ const Home = ({
   order
 }) => { 
   const { modalSearchAttributes } = HomeLogic();
+  const arrayOfTypes = pokemonTypes?.data?.map(({ name }) => name);
 
   const { 
     openModal,
@@ -60,51 +60,47 @@ const Home = ({
     filterByType(event.target.value);
   };
   
-
   useEffect(() => {
     fetchTypes();
   }, [fetchTypes]);
 
-  // agregar el valor "all" al array para enviar a values de lo contrario no se va a poder volver a selecionar
-
-
-  const dataOfTypes = pokemonTypes?.data?.map(({ name }) => name);
-
-  console.log("valor de filter desde Home.js", filter);
-        //values={["all", "flying", "fire", "grass", "bug"]}
-
   return (
     <>
-      
-
-    {
-     dataOfTypes && <Select 
-        initialValue={filter}
-        onChange={handleFilter}
-        values={["all", ...dataOfTypes]}
-      />
-    }
-
-
-
-
-
-
-
-
-      <Select 
-        initialValue={sortBy}
-        onChange={handleSortOption}
-        values={["default", "name", "force"]}
-      />
-      
-      <Select 
-        initialValue={order}
-        onChange={handleOrder}
-        values={["asc", "desc"]}
-      />
-      
       <CardsWithPagination />  
+      
+      <Selects>
+        <span>Sort:
+          <Select 
+            initialValue={sortBy}
+            onChange={handleSortOption}
+            values={["default", "name", "force"]}
+          />
+        </span>
+        
+        <span>Order:
+          <Select 
+            initialValue={order}
+            onChange={handleOrder}
+            values={["asc", "desc"]}
+          />
+        </span>
+        
+        <span>Filter:
+          {
+           arrayOfTypes && <Select 
+              initialValue={filter}
+              onChange={handleFilter}
+              values={["all", ...arrayOfTypes]}
+            />
+          }
+        </span>
+        
+        <div>
+          <button type="submit" onClick={openModal} >
+            <i className="fas fa-search" />
+          </button>
+        </div>
+      </Selects> 
       
       <SearchModal 
         value={pokemonName}
@@ -112,12 +108,6 @@ const Home = ({
         onSubmit={handleSearch}
         {...rest} 
       />
-      
-      <div className="search-btn btn-modal-position">
-        <button type="submit" onClick={openModal} >
-          <i className="fas fa-search" />
-        </button>
-      </div>
     </>
   ); 
 };

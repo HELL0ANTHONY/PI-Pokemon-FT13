@@ -1,23 +1,26 @@
 import styled from "styled-components";
 
-export const HomeStyles = styled.div`
-  margin: 30px;
-  display: grid;
-  gap: 30px;
-  grid-template-columns: repeat(4, 1fr);
-  justify-items: center;
-  align-content: center;
+export const Selects = styled.div`
+  display: inline-flex;
+  padding: 15px;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 20px;
+  position: absolute;
+  top: 2px;
+  right: 80px;
 
-  @media(max-width: 1100px) {
-    grid-template-columns: repeat(3, 1fr);
+  span {
+    margin: 5px;
+    padding: 3px;
+    
+    select {
+      margin: 5px;
+    }
   }
 
-  @media(max-width: 850px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media(max-width: 590px) {
-    grid-template-columns: repeat(1, 1fr);
+  div {
+    padding: 7px;
   }
 `;
 
