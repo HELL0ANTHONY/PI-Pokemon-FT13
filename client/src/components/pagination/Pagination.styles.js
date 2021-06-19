@@ -10,13 +10,12 @@ export const PaginationBox = styled.div`
 export const PaginationList = styled.ul`
   ${flex("center", "space-evenly")};
   padding: 10px;
-  width: 60%;
 
   li {
     ${flex("center", "center")};
     width: 45px;
     height: 30px;
-    margin: 5px;
+    margin: 10px;
     list-style: none;
     border: 1px solid #a9aac6;
     border-radius: 5px;

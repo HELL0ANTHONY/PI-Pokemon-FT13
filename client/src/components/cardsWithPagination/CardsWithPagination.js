@@ -7,35 +7,42 @@ import Pagination from "../pagination/Pagination";
 import { printCards } from "../../helpers/printCards";
 import { Cards } from "./CardsWithPagination.styles.js";
 
-const CardsWithPagination = ({ fetchPokemons, goToPage, pokemons, currentPage, sortBy, order }) => {
+const CardsWithPagination = ({ fetchPokemons, goToPage, pokemons, currentPage, sortBy, order, filter }) => {
   const totalPages = pokemons?.paginationData?.totalPages;
   const paginate   = pageNumber => goToPage(pageNumber);
 
   useEffect(() => {
-    fetchPokemons(currentPage, sortBy, order);
-  }, [fetchPokemons, currentPage, sortBy, order]); 
+    fetchPokemons(`http://localhost:3001/pokemons?page=${currentPage}&sort=${sortBy}&order=${order}&filter=${filter}`);
+  }, [fetchPokemons, currentPage, sortBy, filter, order]); 
 
-const printPagination = _ => totalPages && totalPages > 1;
+  const printPagination = _ => { 
+    return (totalPages && totalPages > 1) 
+      && <Pagination totalPages={totalPages} paginate={paginate} />
+  };
+
   return (
     <>
-      {printPagination() && <Pagination totalPages={totalPages} paginate={paginate} />}
-      <Cards>
-        {
-          pokemons?.data 
-            ? printCards(pokemons.data) 
-            : <h1>Loading...</h1>
-        }
-      </Cards>
-      {printPagination() && <Pagination totalPages={totalPages} paginate={paginate} />}
+      {printPagination()}
+        <Cards>
+          {
+            !pokemons?.data 
+              ? <h1>Loading...</h1>
+              : !pokemons.data.length
+                ? <h1>Empty</h1>
+                : printCards(pokemons.data) 
+          }
+        </Cards>
+      {printPagination()}
     </>
   );
 };
 
-const mapStateToProps = ({ pokemons, currentPage, sortBy, order }) => ({
+const mapStateToProps = ({ pokemons, currentPage, sortBy, order, filter }) => ({
   currentPage,
   pokemons,
   sortBy,
-  order
+  order,
+  filter
 });
 
 const mapDispatchToProps = dispatch => ({

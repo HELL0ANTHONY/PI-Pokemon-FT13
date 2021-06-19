@@ -1,7 +1,9 @@
+import { useEffect } from "react";
 import { connect } from "react-redux";
 import { useKey } from "../../hooks/useKey";
 import fetchPokemonByName from "../../redux/reducers/fetchPokemonByName";
-import { setSortBy, changeOrder } from "../../redux/actions/actions";
+import fetchPokemonTypes from "../../redux/reducers/fetchPokemonTypes";
+import { setSortBy, changeOrder, filterByType } from "../../redux/actions/actions";
 
 import HomeLogic from "./HomeLogic";
 import SearchModal from "../../components/modals/modalSearch/SearchModal";
@@ -11,7 +13,18 @@ import Select from "../../components/Select";
 // import { HomeStyles } from "./Home.styles.js";
 import "./home.css";
 
-const Home = ({ searchPokemonByName, setCardsOrder, changeOrder, pokemons, sortBy, order }) => { 
+const Home = ({ 
+  searchPokemonByName, 
+  setCardsOrder,
+  fetchTypes, 
+  pokemonTypes,
+  filterByType,
+  changeOrder, 
+  pokemons,
+  sortBy, 
+  filter,
+  order
+}) => { 
   const { modalSearchAttributes } = HomeLogic();
 
   const { 
@@ -41,9 +54,44 @@ const Home = ({ searchPokemonByName, setCardsOrder, changeOrder, pokemons, sortB
     event.preventDefault();
     setCardsOrder(event.target.value);
   };
+
+  const handleFilter = event => {
+    event.preventDefault();
+    filterByType(event.target.value);
+  };
   
+
+  useEffect(() => {
+    fetchTypes();
+  }, [fetchTypes]);
+
+  // agregar el valor "all" al array para enviar a values de lo contrario no se va a poder volver a selecionar
+
+
+  const dataOfTypes = pokemonTypes?.data?.map(({ name }) => name);
+
+  console.log("valor de filter desde Home.js", filter);
+        //values={["all", "flying", "fire", "grass", "bug"]}
+
   return (
     <>
+      
+
+    {
+     dataOfTypes && <Select 
+        initialValue={filter}
+        onChange={handleFilter}
+        values={["all", ...dataOfTypes]}
+      />
+    }
+
+
+
+
+
+
+
+
       <Select 
         initialValue={sortBy}
         onChange={handleSortOption}
@@ -74,16 +122,20 @@ const Home = ({ searchPokemonByName, setCardsOrder, changeOrder, pokemons, sortB
   ); 
 };
 
-const mapStateToProps = ({ pokemons, sortBy, order }) => ({
+const mapStateToProps = ({ pokemons, sortBy, order, pokemonTypes, filter }) => ({
+  pokemonTypes,
   pokemons,
   sortBy,
+  filter,
   order
 });
 
 const mapDispatchToProps = dispatch => ({
   searchPokemonByName: string => dispatch(fetchPokemonByName(string)),
   setCardsOrder: string => dispatch(setSortBy(string)),
-  changeOrder: string => dispatch(changeOrder(string))
+  changeOrder: string => dispatch(changeOrder(string)),
+  fetchTypes: () => dispatch(fetchPokemonTypes()),
+  filterByType: type => dispatch(filterByType(type)) 
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
