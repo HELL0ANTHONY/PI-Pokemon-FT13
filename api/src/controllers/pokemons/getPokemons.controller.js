@@ -17,7 +17,7 @@ async function getPokemons(req, res, next) {
 
   if (Number.isNaN(page)) throw new Error("'Page' is not a number");
 
-  const NUMBER_OF_REQUESTS_TO_THE_API = 8;
+  const NUMBER_OF_REQUESTS_TO_THE_API = 20;
 
   if (!cache.getLength()) {
     const promises = [...Array(NUMBER_OF_REQUESTS_TO_THE_API + 1).keys()]
@@ -37,18 +37,21 @@ async function getPokemons(req, res, next) {
     }
   });
 
+  const mergedDatabase = [...pokemonsFromTheDB, ...cache.getValues()];
   let pokemons = [];
+
   if (filter !== undefined && filter && filter !== "all" ) {
-    pokemons = [...pokemonsFromTheDB, ...cache.getValues()]
+    pokemons = mergedDatabase
       .filter(({ types }) => types.some(({ name }) => name === filter))
-  } else pokemons = [...pokemonsFromTheDB, ...cache.getValues()];
+  } else pokemons = [...mergedDatabase];
 
   let pokemonsSorted = [];
   if(sort !== undefined && sort && sort !== "default") {
     pokemonsSorted = (sort === "name")
       ? Sort.byName(pokemons, order)
       : Sort.byForce(pokemons, order);
-  } else pokemonsSorted = [...pokemons];
+  } else
+    pokemonsSorted = (order === "asc") ? [...pokemons] : [...pokemons].reverse();
 
   const pageConfig = pagination(page, LIMIT, pokemonsSorted);
   const { startIndex, endIndex, ...rest } = pageConfig;
