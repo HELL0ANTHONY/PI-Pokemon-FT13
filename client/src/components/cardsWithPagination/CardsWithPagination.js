@@ -28,8 +28,8 @@ const CardsWithPagination = ({ fetchPokemons, goToPage, pokemons, currentPage, s
             !pokemons?.data 
               ? <h1>Loading...</h1>
               : !pokemons.data.length
-                ? <h1>Empty</h1>
-                : printCards(pokemons.data) 
+                  ? <h1 className="no-pokemon">UPS! There is no such Pokemon</h1>
+                  : printCards(pokemons.data) 
           }
         </Cards>
       {printPagination()}

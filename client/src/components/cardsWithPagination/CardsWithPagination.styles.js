@@ -8,6 +8,16 @@ export const Cards = styled.div`
   justify-items: center;
   align-content: center;
 
+  .no-pokemon {
+    width: 800px;
+    height: 300px;
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Roboto Mono";
+  }
+
   @media(max-width: 1100px) {
     grid-template-columns: repeat(3, 1fr);
   }
