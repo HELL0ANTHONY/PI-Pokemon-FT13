@@ -9,13 +9,15 @@ const { filteringAndSortingData } = require("../../helper/filteringAndSortingDat
 const cache = new Cache();
 
 async function getPokemons(req, res, next) {
-  const LIMIT  = 12;
-  const page   = Number.parseInt(req.query.page);
-  const sort   = req.query.sort?.trim();
-  const order  = req.query.order?.trim();
-  const filter = req.query.filter?.trim();
+  const LIMIT        = 12;
+  const page         = Number.parseInt(req.query.page);
+  const sort         = req.query.sort?.trim();
+  const order        = req.query.order?.trim();
+  const filter       = req.query.filter?.trim();
+  const sendPokemons = req.query.sendPokemons?.trim();
 
-  if (Number.isNaN(page)) throw new Error("'Page' is not a number");
+  if (sendPokemons === undefined && Number.isNaN(page))
+    throw new Error("'Page' is not a number");
 
   const NUMBER_OF_REQUESTS_TO_THE_API = 20;
 
@@ -38,8 +40,13 @@ async function getPokemons(req, res, next) {
   });
 
   const mergedDatabase = [...pokemonsFromTheDB, ...cache.getValues()];
-  let pokemons = [];
 
+
+  if (sendPokemons !== undefined && sendPokemons && sendPokemons === "ok") {
+    return res.json({ data: mergedDatabase });
+  }
+
+  let pokemons = [];
   if (filter !== undefined && filter && filter !== "all" ) {
     pokemons = mergedDatabase
       .filter(({ types }) => types.some(({ name }) => name === filter))
@@ -50,8 +57,11 @@ async function getPokemons(req, res, next) {
     pokemonsSorted = (sort === "name")
       ? Sort.byName(pokemons, order)
       : Sort.byForce(pokemons, order);
-  } else
-    pokemonsSorted = (order === "asc") ? [...pokemons] : [...pokemons].reverse();
+  } else {
+    pokemonsSorted = (order === "asc") 
+      ? [...pokemons] 
+      : [...pokemons].reverse();
+  }
 
   const pageConfig = pagination(page, LIMIT, pokemonsSorted);
   const { startIndex, endIndex, ...rest } = pageConfig;
