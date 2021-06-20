@@ -30,16 +30,16 @@ const Home = () => {
   } = modalSearchAttributes();
 
   const handleSearch = event => {
+    event.preventDefault();
     const name = pokemonName.trim();
     if (name) {
-      event.preventDefault();
       dispatch(fetchPokemonByName(name.toLowerCase()));
       closeModalSearch(event);
-    } 
+    }
     else closeModalSearch(event);
-  };
+  }
   useKey("Enter", handleSearch);
-  
+
   useEffect(() => {
     dispatch(fetchPokemonTypes());
   }, [dispatch]);
@@ -47,7 +47,6 @@ const Home = () => {
   return (
     <>
       <CardsWithPagination />  
-      
       <Selects>
         <span>Sort:
           <Select 
@@ -56,7 +55,6 @@ const Home = () => {
             values={["default", "name", "force"]}
           />
         </span>
-        
         <span>Order:
           <Select 
             initialValue={order}
@@ -64,24 +62,21 @@ const Home = () => {
             values={["asc", "desc"]}
           />
         </span>
-        
         <span>Filter:
           {
-           arrayOfTypes && <Select 
+            arrayOfTypes && <Select 
               initialValue={filter}
               onChange={handleFilter}
               values={["all", ...arrayOfTypes]}
             />
           }
         </span>
-        
         <div>
           <button type="submit" onClick={openModal} >
             <i className="fas fa-search" />
           </button>
         </div>
       </Selects> 
-      
       <SearchModal 
         value={pokemonName}
         closeModal={closeModalSearch}

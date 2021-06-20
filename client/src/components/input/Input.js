@@ -10,7 +10,7 @@ const Input = ({ label, type, name, value, onChange, error }) => {
         value={value}
         onChange={onChange}
       />
-    {error && <p className="form--error">{error}</p>} 
+      {error && <p className="form--error">{error}</p>} 
     </>
   );
 };

@@ -7,14 +7,12 @@ const Card = ({ id, name, image, types }) => {
   return (
     <Main>
       <CardContainer>
-        
         <Front>
           <Box>
             <Image image={image}/> 
           </Box> 
           <h1>{name}</h1>
         </Front>
-        
         <Back>
           <Id>
             <h3> Id: {typeof id === "number" ? id : sliceId(id)}</h3>
@@ -25,7 +23,6 @@ const Card = ({ id, name, image, types }) => {
           </List> 
           <Link to={`/details/${id}`}>Go to Details</Link>
         </Back>
-        
       </CardContainer>
     </Main>
   );

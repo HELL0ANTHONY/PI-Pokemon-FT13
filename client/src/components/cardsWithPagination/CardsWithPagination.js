@@ -8,10 +8,9 @@ import { printCards } from "../../helpers/printCards";
 import { Cards } from "./CardsWithPagination.styles.js";
 
 const CardsWithPagination = ({ fetchPokemons }) => {
-
   const { currentPage, pokemons, sortBy, order, filter } = useSelector(state => state);
   const totalPages = pokemons?.paginationData?.totalPages;
-  
+
   const paginate   = pageNumber => dispatch(goToPage(pageNumber));
   const dispatch   = useDispatch();
 
@@ -27,15 +26,15 @@ const CardsWithPagination = ({ fetchPokemons }) => {
   return (
     <>
       {printPagination()}
-        <Cards>
-          {
-            !pokemons?.data 
-              ? <h1>Loading...</h1>
-              : !pokemons.data.length
-                  ? <h1 className="no-pokemon">UPS! There is no such Pokemon</h1>
-                  : printCards(pokemons.data) 
-          }
-        </Cards>
+      <Cards>
+        {
+          !pokemons?.data 
+            ? <h1>Loading...</h1>
+            : !pokemons.data.length
+              ? <h1 className="no-pokemon">UPS! There is no such Pokemon</h1>
+              : printCards(pokemons.data) 
+        }
+      </Cards>
       {printPagination()}
     </>
   );
@@ -48,3 +47,13 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CardsWithPagination);
+
+
+
+/*
+ *
+ * */
+
+
+
+

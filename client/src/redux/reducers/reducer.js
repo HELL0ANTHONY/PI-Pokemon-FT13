@@ -25,6 +25,11 @@ const initialState = {
   pokemonTypes: undefined
 };
 
+const pokeByName = (array, name) => {
+  const pokemons = array.filter(pokemon => pokemon.name.toLowerCase() === name.toLowerCase());
+  return { data: pokemons }; 
+};
+
 export function rootReducer(state = initialState, { type, payload, error }) {
   switch (type) {
     case FETCH_PENDING:
@@ -71,7 +76,7 @@ export function rootReducer(state = initialState, { type, payload, error }) {
       return {
         ...state,
         pending: false,
-        pokemons: payload
+        pokemons: pokeByName(payload.json.data, payload.name)
       }
     case SORT_BY:
       return {
