@@ -1,31 +1,26 @@
 import { useEffect } from "react";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useKey } from "../../hooks/useKey";
 import fetchPokemonByName from "../../redux/reducers/fetchPokemonByName";
 import fetchPokemonTypes from "../../redux/reducers/fetchPokemonTypes";
-import { setSortBy, changeOrder, filterByType } from "../../redux/actions/actions";
 
-import HomeLogic from "./HomeLogic";
+import { HomeLogic } from "./HomeLogic";
 import SearchModal from "../../components/modals/modalSearch/SearchModal";
 import CardsWithPagination from "../../components/cardsWithPagination/CardsWithPagination";
 import Select from "../../components/Select";
-
 import { Selects } from "./Home.styles.js";
 
-const Home = ({ 
-  searchPokemonByName, 
-  setCardsOrder,
-  fetchTypes, 
-  pokemonTypes,
-  filterByType,
-  changeOrder, 
-  pokemons,
-  sortBy, 
-  filter,
-  order
-}) => { 
-  const { modalSearchAttributes } = HomeLogic();
+const Home = () => { 
+  const { 
+    modalSearchAttributes, 
+    handleFilter,
+    handleOrder,
+    handleSortOption 
+  } = HomeLogic();
+
+  const { sortBy, filter, order, pokemonTypes } = useSelector(state => state);
   const arrayOfTypes = pokemonTypes?.data?.map(({ name }) => name);
+  const dispatch = useDispatch();
 
   const { 
     openModal,
@@ -38,31 +33,16 @@ const Home = ({
     const name = pokemonName.trim();
     if (name) {
       event.preventDefault();
-      searchPokemonByName(name.toLowerCase());
+      dispatch(fetchPokemonByName(name.toLowerCase()));
       closeModalSearch(event);
     } 
     else closeModalSearch(event);
   };
   useKey("Enter", handleSearch);
-
-  const handleOrder = event => {
-    event.preventDefault();
-    changeOrder(event.target.value);
-  };
-
-  const handleSortOption = event => {
-    event.preventDefault();
-    setCardsOrder(event.target.value);
-  };
-
-  const handleFilter = event => {
-    event.preventDefault();
-    filterByType(event.target.value);
-  };
   
   useEffect(() => {
-    fetchTypes();
-  }, [fetchTypes]);
+    dispatch(fetchPokemonTypes());
+  }, [dispatch]);
 
   return (
     <>
@@ -112,20 +92,4 @@ const Home = ({
   ); 
 };
 
-const mapStateToProps = ({ pokemons, sortBy, order, pokemonTypes, filter }) => ({
-  pokemonTypes,
-  pokemons,
-  sortBy,
-  filter,
-  order
-});
-
-const mapDispatchToProps = dispatch => ({
-  searchPokemonByName: string => dispatch(fetchPokemonByName(string)),
-  setCardsOrder: string => dispatch(setSortBy(string)),
-  changeOrder: string => dispatch(changeOrder(string)),
-  fetchTypes: () => dispatch(fetchPokemonTypes()),
-  filterByType: type => dispatch(filterByType(type)) 
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default Home;
