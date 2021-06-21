@@ -13,9 +13,7 @@ const Checkbox = ({ label, value, name, onChange }) => {
             name={name}
           />
         </div>
-        <div className="checkbox-text">
-          {label}
-        </div>
+        <div className="checkbox-text">{label}</div>
       </label>
     </div>
   );

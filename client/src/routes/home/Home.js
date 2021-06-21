@@ -10,34 +10,29 @@ import CardsWithPagination from "../../components/cardsWithPagination/CardsWithP
 import Select from "../../components/Select";
 import { Selects } from "./Home.styles.js";
 
-const Home = () => { 
-  const { 
-    modalSearchAttributes, 
-    handleFilter,
-    handleOrder,
-    handleSortOption 
-  } = HomeLogic();
+const Home = () => {
+  const { modalSearchAttributes, handleFilter, handleOrder, handleSortOption } =
+    HomeLogic();
 
-  const { sortBy, filter, order, pokemonTypes } = useSelector(state => state);
+  const { sortBy, filter, order, pokemonTypes } = useSelector((state) => state);
   const arrayOfTypes = pokemonTypes?.data?.map(({ name }) => name);
   const dispatch = useDispatch();
 
-  const { 
+  const {
     openModal,
     closeModal: closeModalSearch,
     value: pokemonName,
     ...rest
   } = modalSearchAttributes();
 
-  const handleSearch = event => {
+  const handleSearch = (event) => {
     event.preventDefault();
     const name = pokemonName.trim();
     if (name) {
       dispatch(fetchPokemonByName(name.toLowerCase()));
       closeModalSearch(event);
-    }
-    else closeModalSearch(event);
-  }
+    } else closeModalSearch(event);
+  };
   useKey("Enter", handleSearch);
 
   useEffect(() => {
@@ -46,45 +41,48 @@ const Home = () => {
 
   return (
     <>
-      <CardsWithPagination />  
+      <CardsWithPagination />
       <Selects>
-        <span>Sort:
-          <Select 
+        <span>
+          Sort:
+          <Select
             initialValue={sortBy}
             onChange={handleSortOption}
             values={["default", "name", "force"]}
           />
         </span>
-        <span>Order:
-          <Select 
+        <span>
+          Order:
+          <Select
             initialValue={order}
             onChange={handleOrder}
             values={["asc", "desc"]}
           />
         </span>
-        <span>Filter:
-          {
-            arrayOfTypes && <Select 
+        <span>
+          Filter:
+          {arrayOfTypes && (
+            <Select
               initialValue={filter}
               onChange={handleFilter}
               values={["all", ...arrayOfTypes]}
             />
-          }
+          )}
         </span>
         <div>
-          <button type="submit" onClick={openModal} >
+          <button type="submit" onClick={openModal}>
             <i className="fas fa-search" />
           </button>
         </div>
-      </Selects> 
-      <SearchModal 
+      </Selects>
+      <SearchModal
         value={pokemonName}
         closeModal={closeModalSearch}
         onSubmit={handleSearch}
-        {...rest} 
+        {...rest}
       />
     </>
-  ); 
+  );
 };
 
 export default Home;

@@ -13,10 +13,12 @@ const Landing = ({ message }) => {
             type="button"
             buttonStyle="btn--gray--outline"
             buttonSize="btn--jumbo"
-          >START</Button>
+          >
+            START
+          </Button>
         </Link>
       </section>
-      <Footer 
+      <Footer
         author={"Jorge Antonio Fernandez"}
         description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
       />

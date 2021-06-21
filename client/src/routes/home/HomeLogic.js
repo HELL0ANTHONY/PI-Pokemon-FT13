@@ -2,7 +2,11 @@ import { useState } from "react";
 import { useModal } from "../../hooks/useModal";
 
 import { useDispatch } from "react-redux";
-import { setSortBy, changeOrder, filterByType } from "../../redux/actions/actions";
+import {
+  setSortBy,
+  changeOrder,
+  filterByType,
+} from "../../redux/actions/actions";
 
 export const HomeLogic = () => {
   const [searchByName, setSearchByName] = useState("");
@@ -13,8 +17,8 @@ export const HomeLogic = () => {
     modalSearchAttributes,
     handleOrder,
     handleSortOption,
-    handleFilter
-  }
+    handleFilter,
+  };
 
   function handleOrder(event) {
     event.preventDefault();
@@ -26,7 +30,7 @@ export const HomeLogic = () => {
     dispatch(setSortBy(event.target.value));
   }
 
-  function handleFilter (event) {
+  function handleFilter(event) {
     event.preventDefault();
     dispatch(filterByType(event.target.value));
   }
@@ -36,20 +40,19 @@ export const HomeLogic = () => {
       name: "pokemonName",
       value: searchByName,
       isOpen: isOpenSearchModal,
-      openModal: event => {
+      openModal: (event) => {
         event.preventDefault();
         openSearchModal();
       },
-      closeModal: event => {
+      closeModal: (event) => {
         event.preventDefault();
         closeSearchModal();
         setSearchByName("");
       },
-      onChange: event => {
+      onChange: (event) => {
         event.preventDefault();
         setSearchByName(event.target.value);
-      }
+      },
     };
   }
 };
-

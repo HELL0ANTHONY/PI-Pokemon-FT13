@@ -9,11 +9,10 @@ const FooterLogic = () => {
 
   return {
     printIcons() {
-      return _icons.map((icon, index) => <li
-        key={index}
-        dangerouslySetInnerHTML={{ __html: icon }}
-      />)
-    }
+      return _icons.map((icon, index) => (
+        <li key={index} dangerouslySetInnerHTML={{ __html: icon }} />
+      ));
+    },
   };
 };
 

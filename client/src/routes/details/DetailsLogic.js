@@ -4,4 +4,3 @@ export const DetailsLogic = () => {
   const { id } = useParams();
   return { id };
 };
-

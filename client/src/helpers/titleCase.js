@@ -1,9 +1,5 @@
-const capitalize = word => word.charAt(0).toUpperCase() + word.slice(1);
+const capitalize = (word) => word.charAt(0).toUpperCase() + word.slice(1);
 
-export const titleCase = string => {
-  return string
-    .toLowerCase()
-    .split(' ')
-    .map(capitalize)
-    .join(' ');
+export const titleCase = (string) => {
+  return string.toLowerCase().split(" ").map(capitalize).join(" ");
 };

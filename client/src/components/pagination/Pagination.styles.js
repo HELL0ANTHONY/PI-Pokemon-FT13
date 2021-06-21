@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { flex } from "../../elements/flex.style.js";
 
 export const PaginationBox = styled.div`
-  ${flex("center", "center")};  
+  ${flex("center", "center")};
   color: white;
   width: 100%;
 `;
@@ -30,4 +30,4 @@ export const PageButton = styled.button`
   &:hover {
     background: orange;
   }
-`; 
+`;

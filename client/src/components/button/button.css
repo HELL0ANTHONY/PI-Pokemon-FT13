@@ -1,19 +1,19 @@
 :root {
-  --danger : #eb3f27;
-  --dark   : #181717;
-  --gray   : #e7ebda;
+  --danger: #eb3f27;
+  --dark: #181717;
+  --gray: #e7ebda;
   --primary: #4628ff;
   --success: #00bb2d;
   --warning: #ffd028;
-  --white  : #fdfdfd;
+  --white: #fdfdfd;
 }
 
 .btn {
-  border-radius: .625rem;
-  cursor       : pointer;
-  font-family  : "Roboto Mono", "san-serif";
-  font-weight  : 400;
-  transition   : transform 0.3s ease;
+  border-radius: 0.625rem;
+  cursor: pointer;
+  font-family: "Roboto Mono", "san-serif";
+  font-weight: 400;
+  transition: transform 0.3s ease;
 }
 
 .btn:hover {
@@ -23,65 +23,65 @@
 /* Button Colors and Styles */
 .btn--primary--solid {
   background-color: var(--primary);
-  border          : none;
-  color           : var(--white);
+  border: none;
+  color: var(--white);
 }
 
 .btn--danger--solid {
   background-color: var(--danger);
-  border          : none;
-  color           : var(--white);
+  border: none;
+  color: var(--white);
 }
 
 .btn--success--solid {
   background-color: var(--success);
-  border          : none;
-  color           : var(--white);
+  border: none;
+  color: var(--white);
 }
 
 .btn--warning--solid {
   background-color: var(--warning);
-  color           : var(--dark);
-  border          : none;
+  color: var(--dark);
+  border: none;
 }
 
 .btn--primary--outline {
   background-color: transparent;
-  border          : 2px solid var(--primary);
-  color           : var(--primary);
+  border: 2px solid var(--primary);
+  color: var(--primary);
 }
 
 .btn--gray--outline {
   background-color: transparent;
-  border          : 2px solid var(--gray);
-  color           : var(--gray);
+  border: 2px solid var(--gray);
+  color: var(--gray);
 }
 
 .btn--warning--outline {
   background-color: transparent;
-  border          : 2px solid var(--warning);
-  color           : var(--warning);
+  border: 2px solid var(--warning);
+  color: var(--warning);
 }
 
 .btn--danger--outline {
   background-color: transparent;
-  border          : 2px solid var(--danger);
-  color           : var(--danger);
+  border: 2px solid var(--danger);
+  color: var(--danger);
 }
 
 /* Button Sizes */
 .btn--medium {
   font-size: 1.125rem;
-  padding  : .625rem 1.25rem;
+  padding: 0.625rem 1.25rem;
 }
 
 .btn--large {
   font-size: 1.25rem;
-  padding  : .9375rem 1.875rem;
+  padding: 0.9375rem 1.875rem;
 }
 
 .btn--jumbo {
-  font-size     : 2.5rem;
-  letter-spacing: .125rem;
-  padding       : .9375rem 2.1875rem;
+  font-size: 2.5rem;
+  letter-spacing: 0.125rem;
+  padding: 0.9375rem 2.1875rem;
 }

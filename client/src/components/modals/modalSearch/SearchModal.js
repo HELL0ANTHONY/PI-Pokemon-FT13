@@ -1,12 +1,16 @@
 import Modal from "../../modal/Modal";
 import "./searchModal.css";
 
-const SearchModal = ({ isOpen, closeModal, name, value, onChange, onSubmit }) => {
+const SearchModal = ({
+  isOpen,
+  closeModal,
+  name,
+  value,
+  onChange,
+  onSubmit,
+}) => {
   return (
-    <Modal
-      isOpen={isOpen}
-      closeModal={closeModal}
-    >
+    <Modal isOpen={isOpen} closeModal={closeModal}>
       <nav className="search-modal">
         <form className="search-container" onSubmit={onSubmit}>
           <input

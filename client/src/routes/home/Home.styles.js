@@ -13,7 +13,7 @@ export const Selects = styled.div`
   span {
     margin: 5px;
     padding: 3px;
-    
+
     select {
       margin: 5px;
     }
@@ -23,4 +23,3 @@ export const Selects = styled.div`
     padding: 7px;
   }
 `;
-

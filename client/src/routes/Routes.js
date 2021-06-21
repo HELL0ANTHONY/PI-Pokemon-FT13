@@ -4,11 +4,11 @@ import Home from "./home/Home";
 import Details from "./details/Details";
 import PokemonForm from "./pokemonForm/PokemonForm";
 
-const Routes = _ => {
+const Routes = (_) => {
   return (
     <>
       <Switch>
-        <Route exact path='/'>
+        <Route exact path="/">
           <Landing message={"Who's that pokemon?"} />
         </Route>
         <Route path="/home" component={Home} />

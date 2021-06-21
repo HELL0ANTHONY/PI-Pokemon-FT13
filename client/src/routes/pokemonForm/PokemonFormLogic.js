@@ -3,13 +3,14 @@ import { useModal } from "../../hooks/useModal";
 import { pokemonFormValidation } from "../../validations/pokemonFormValidation";
 
 export const PokemonFormLogic = () => {
-  const [input, setInput]                 = useState(initialState());
-  const [errors, setErrors]               = useState({});
-  const [newInputs, setNewInputs]         = useState([]);
+  const [input, setInput] = useState(initialState());
+  const [errors, setErrors] = useState({});
+  const [newInputs, setNewInputs] = useState([]);
   const [checkboxTypes, setCheckboxTypes] = useState([]);
 
-  const [isOpenModalOfTypes, openModalOfTypes, closeModalOfTypes]    = useModal();
-  const [isOpenModalNewTypes, openModalNewTypes, closeModalNewTypes] = useModal();
+  const [isOpenModalOfTypes, openModalOfTypes, closeModalOfTypes] = useModal();
+  const [isOpenModalNewTypes, openModalNewTypes, closeModalNewTypes] =
+    useModal();
 
   return {
     inputAttributes,
@@ -17,28 +18,30 @@ export const PokemonFormLogic = () => {
     createNewTypesLogic,
     newPokemonAttributes,
     cleanForm,
-    errors
+    errors,
   };
 
   function newPokemonAttributes() {
     const { name, image, ...numberValues } = input;
-    const newTypes      = newInputs.filter(t => t.trim() && isNaN(t.trim())).map(t => ({ name: t }));
-    const existingTypes = checkboxTypes.map(type => ({ name: type }));
-    const numbers       = Object.fromEntries(
-      Object.entries(numberValues).map(([key, value]) => ([key, +value]))
+    const newTypes = newInputs
+      .filter((t) => t.trim() && isNaN(t.trim()))
+      .map((t) => ({ name: t }));
+    const existingTypes = checkboxTypes.map((type) => ({ name: type }));
+    const numbers = Object.fromEntries(
+      Object.entries(numberValues).map(([key, value]) => [key, +value])
     );
     return {
-      name, 
+      name,
       image,
       ...numbers,
-      types: [...existingTypes, ...newTypes] 
+      types: [...existingTypes, ...newTypes],
     };
   }
 
   function cleanForm() {
     setCheckboxTypes([]); // el checkbox no cambia porque el checked siempre esta en true, por lo que para que resetear hay que cambiarlo a false.
     setInput(initialState());
-    setNewInputs([]); 
+    setNewInputs([]);
   }
 
   function handleInput(event) {
@@ -46,7 +49,7 @@ export const PokemonFormLogic = () => {
     event.preventDefault();
     setInput({
       ...input,
-      [name]: value
+      [name]: value,
     });
     setErrors(pokemonFormValidation(input));
   }
@@ -56,15 +59,15 @@ export const PokemonFormLogic = () => {
       title: "Add the new pokemon types",
       newInputs,
       isOpen: isOpenModalNewTypes,
-      openModal: event => {
+      openModal: (event) => {
         event.preventDefault();
         openModalNewTypes();
       },
-      closeModal: event => {
+      closeModal: (event) => {
         event.preventDefault();
         closeModalNewTypes();
       },
-      addNewInput: event => {
+      addNewInput: (event) => {
         event.preventDefault();
         setNewInputs([...newInputs, ""]);
       },
@@ -77,8 +80,8 @@ export const PokemonFormLogic = () => {
         event.preventDefault();
         newInputs[index] = event.target.value;
         setNewInputs([...newInputs]);
-      }
-    }; 
+      },
+    };
   }
 
   function checkboxLogic() {
@@ -87,23 +90,20 @@ export const PokemonFormLogic = () => {
       name: checkboxTypes,
       title: "Select Pokemon Types",
       isOpen: isOpenModalOfTypes,
-      closeModal: event => {
+      closeModal: (event) => {
         event.preventDefault();
         closeModalOfTypes();
       },
-      openModal: event => {
+      openModal: (event) => {
         event.preventDefault();
         openModalOfTypes();
-      }, 
-      onChange: event => {
+      },
+      onChange: (event) => {
         event.preventDefault();
         if (event.target.checked) {
-          setCheckboxTypes([
-            ...checkboxTypes,
-            event.target.value
-          ]);
+          setCheckboxTypes([...checkboxTypes, event.target.value]);
         }
-      }
+      },
     };
   }
 
@@ -115,7 +115,7 @@ export const PokemonFormLogic = () => {
         name: "name",
         value: input.name,
         onChange: handleInput,
-        error: errors.name
+        error: errors.name,
       },
       {
         label: "Force:",
@@ -123,7 +123,7 @@ export const PokemonFormLogic = () => {
         name: "baseExperience",
         value: input.baseExperience,
         onChange: handleInput,
-        error: errors.baseExperience
+        error: errors.baseExperience,
       },
       {
         label: "Hp:",
@@ -131,7 +131,7 @@ export const PokemonFormLogic = () => {
         name: "hp",
         value: input.hp,
         onChange: handleInput,
-        error: errors.hp
+        error: errors.hp,
       },
       {
         label: "Defense:",
@@ -139,7 +139,7 @@ export const PokemonFormLogic = () => {
         name: "defense",
         value: input.defense,
         onChange: handleInput,
-        error: errors.defense
+        error: errors.defense,
       },
       {
         label: "Height:",
@@ -147,7 +147,7 @@ export const PokemonFormLogic = () => {
         name: "height",
         value: input.height,
         onChange: handleInput,
-        error: errors.height
+        error: errors.height,
       },
       {
         label: "Weight:",
@@ -155,7 +155,7 @@ export const PokemonFormLogic = () => {
         name: "weight",
         value: input.weight,
         onChange: handleInput,
-        error: errors.weight
+        error: errors.weight,
       },
       {
         label: "Speed:",
@@ -163,7 +163,7 @@ export const PokemonFormLogic = () => {
         name: "speed",
         value: input.speed,
         onChange: handleInput,
-        error: errors.speed
+        error: errors.speed,
       },
       {
         label: "Image:",
@@ -171,7 +171,7 @@ export const PokemonFormLogic = () => {
         name: "image",
         value: input.image,
         onChange: handleInput,
-        error: errors.image
+        error: errors.image,
       },
     ];
   }
@@ -186,6 +186,6 @@ function initialState() {
     height: "",
     weight: "",
     baseExperience: "",
-    image: ""
+    image: "",
   };
 }

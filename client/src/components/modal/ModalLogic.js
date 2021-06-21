@@ -1,1 +1,1 @@
-export const handleCloseClick = event => event.stopPropagation();
+export const handleCloseClick = (event) => event.stopPropagation();

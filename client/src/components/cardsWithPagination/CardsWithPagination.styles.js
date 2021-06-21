@@ -11,22 +11,22 @@ export const Cards = styled.div`
   .no-pokemon {
     width: 100vw;
     height: 100vh;
-    display: flex; 
+    display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     font-family: "Roboto Mono";
   }
 
-  @media(max-width: 1100px) {
+  @media (max-width: 1100px) {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  @media(max-width: 850px) {
+  @media (max-width: 850px) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media(max-width: 590px) {
+  @media (max-width: 590px) {
     grid-template-columns: repeat(1, 1fr);
   }
 `;

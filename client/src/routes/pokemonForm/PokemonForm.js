@@ -10,26 +10,28 @@ import CheckboxModal from "../../components/modals/checkboxModal/CheckboxModal";
 import AddTypesModal from "../../components/modals/addTypesModal/AddTypesModal";
 import "./pokemonForm.css";
 
-const PokemonForm = ({ createPokemon, getPokemonTypes, newPokemon, pokemonTypes }) => {
-  const { 
+const PokemonForm = ({
+  createPokemon,
+  getPokemonTypes,
+  newPokemon,
+  pokemonTypes,
+}) => {
+  const {
     inputAttributes,
     checkboxLogic,
     createNewTypesLogic,
     newPokemonAttributes,
     cleanForm,
-    errors
+    errors,
   } = PokemonFormLogic();
 
-  const { 
-    checkboxTypes, 
-    openModal: openModalOfNewTypes, 
+  const {
+    checkboxTypes,
+    openModal: openModalOfNewTypes,
     ...newTypesModalAttributes
   } = createNewTypesLogic();
 
-  const { 
-    openModal, 
-    ...modalCheckboxAttributes
-  } = checkboxLogic();
+  const { openModal, ...modalCheckboxAttributes } = checkboxLogic();
 
   const inputs = inputAttributes();
 
@@ -37,7 +39,7 @@ const PokemonForm = ({ createPokemon, getPokemonTypes, newPokemon, pokemonTypes 
     getPokemonTypes();
   }, [getPokemonTypes]);
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     if (!Object.entries(errors).length) {
       createPokemon(newPokemonAttributes());
@@ -50,47 +52,55 @@ const PokemonForm = ({ createPokemon, getPokemonTypes, newPokemon, pokemonTypes 
 
   return (
     <form className="create" onSubmit={handleSubmit}>
-    <div>
-    <h1>Create your new Pokemon</h1>
-    <p>Please fill in this form to create a new Pokemon.</p>
-    <hr />
-    {inputs.map((input, index) => <Input key={index} {...input} />)} 
-    </div>
+      <div>
+        <h1>Create your new Pokemon</h1>
+        <p>Please fill in this form to create a new Pokemon.</p>
+        <hr />
+        {inputs.map((input, index) => (
+          <Input key={index} {...input} />
+        ))}
+      </div>
 
-    <CheckboxModal list={pokemonTypes} {...modalCheckboxAttributes} />
-    <AddTypesModal {...newTypesModalAttributes} />
+      <CheckboxModal list={pokemonTypes} {...modalCheckboxAttributes} />
+      <AddTypesModal {...newTypesModalAttributes} />
 
-    <div className="buttons">
-    <Button
-    onClick={openModalOfNewTypes}
-    buttonSize="btn-medium"
-    buttonStyle="btn--success--solid"
-    >Add New Types</Button>
+      <div className="buttons">
+        <Button
+          onClick={openModalOfNewTypes}
+          buttonSize="btn-medium"
+          buttonStyle="btn--success--solid"
+        >
+          Add New Types
+        </Button>
 
-    <Button
-    onClick={openModal}
-    buttonSize="btn-medium"
-    buttonStyle="btn--success--solid"
-    >Select Types</Button>
+        <Button
+          onClick={openModal}
+          buttonSize="btn-medium"
+          buttonStyle="btn--success--solid"
+        >
+          Select Types
+        </Button>
 
-    <Button
-    type="submit"
-    buttonSize="btn-medium"
-    buttonStyle="btn--success--solid"
-    >Create Pokemon</Button>
-    </div>
+        <Button
+          type="submit"
+          buttonSize="btn-medium"
+          buttonStyle="btn--success--solid"
+        >
+          Create Pokemon
+        </Button>
+      </div>
     </form>
   );
 };
 
 const mapStateToProps = ({ newPokemon, pokemonTypes }) => ({
   newPokemon,
-  pokemonTypes
-}); 
+  pokemonTypes,
+});
 
-const mapDispatchToProps = dispatch => ({
-  createPokemon: object => dispatch(fetchNewPokemon(object)),
-  getPokemonTypes: _ => dispatch(fetchPokemonTypes())
+const mapDispatchToProps = (dispatch) => ({
+  createPokemon: (object) => dispatch(fetchNewPokemon(object)),
+  getPokemonTypes: (_) => dispatch(fetchPokemonTypes()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PokemonForm);

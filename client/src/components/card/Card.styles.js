@@ -5,7 +5,7 @@ const colors = {
   front: "#F9E79F",
   back: "#2e2956",
   orange: "#ff6b00",
-  cinc: "#fafbfd"
+  cinc: "#fafbfd",
 };
 
 const commonStyles = (width, height, radius = 0, position = "static") => {
@@ -14,7 +14,7 @@ const commonStyles = (width, height, radius = 0, position = "static") => {
     width: ${width};
     height: ${height};
     border-radius: ${radius};
-  `; 
+  `;
 };
 
 export const Main = styled.div`
@@ -35,10 +35,10 @@ export const CardContainer = styled.div`
 export const Front = styled.section`
   backface-visibility: hidden;
   ${flex("center", "flex-start", "column")};
-  ${commonStyles("100%", "100%", "8px", "absolute")}; 
+  ${commonStyles("100%", "100%", "8px", "absolute")};
   background: ${colors.front};
-  -webkit-box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.62); 
-  box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.62);
+  -webkit-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.62);
+  box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.62);
 
   h1 {
     font-family: "Baloo Tammudu";
@@ -61,13 +61,13 @@ export const Box = styled.div`
 
 export const Image = styled.div`
   ${commonStyles("130px", "130px", "50%")};
-  background: url(${({image}) => image}) no-repeat; 
+  background: url(${({ image }) => image}) no-repeat;
   background-size: cover;
 `;
 
 export const Back = styled(Front)`
   transform: rotateY(180deg);
-  ${flex("center", "center", "column")}; 
+  ${flex("center", "center", "column")};
   font-family: "Roboto Mono";
 
   color: ${colors.cinc};
@@ -87,33 +87,33 @@ export const Back = styled(Front)`
     padding: 7px;
     border-radius: 4px;
     transition: background 1s ease;
-    
+
     &:hover {
       background: ${colors.orange};
     }
-  } 
+  }
 `;
 
-export const Id = styled.div` 
-  ${flex("center", "flex-start", "row")}; 
-    width: 100%;
-    padding: 20px;
-    
-    h3 {
-      padding: auto;
-      height: 25px;
-      margin-top: 10px;
-      margin-left: 25px;
-      border-left: 8px solid ${colors.orange};
-      border-top-left-radius : 3px;
-      border-bottom-left-radius: 3px;
-    }
- `; 
+export const Id = styled.div`
+  ${flex("center", "flex-start", "row")};
+  width: 100%;
+  padding: 20px;
+
+  h3 {
+    padding: auto;
+    height: 25px;
+    margin-top: 10px;
+    margin-left: 25px;
+    border-left: 8px solid ${colors.orange};
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+  }
+`;
 
 export const List = styled.ul`
-  ${flex("center", "center", "column")}; 
-  list-style-type: none; 
-  
+  ${flex("center", "center", "column")};
+  list-style-type: none;
+
   li {
     font-size: 20px;
     display: block;
@@ -122,4 +122,4 @@ export const List = styled.ul`
     margin-right: 50px;
     text-align: center;
   }
-`; 
+`;

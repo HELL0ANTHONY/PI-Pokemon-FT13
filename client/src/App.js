@@ -2,12 +2,12 @@ import { withRouter } from "react-router-dom";
 import Routes from "./routes/Routes";
 import Navbar from "./components/navbar/Navbar";
 
-import './App.css';
+import "./App.css";
 
 const App = ({ location }) => {
   return (
     <>
-      {location.pathname !== '/' && <Navbar />}
+      {location.pathname !== "/" && <Navbar />}
       <Routes />
     </>
   );

@@ -6,16 +6,16 @@ export const SelectStyles = styled.select`
   font-family: "Roboto Mono";
   font-size: 18px;
   font-weight: 700px;
-  background-color: #FF8000;
+  background-color: #ff8000;
   color: white;
   border: 1px solid gray;
 
   &:hover {
-    border-color: #FFD480;
+    border-color: #ffd480;
   }
-  
+
   option {
     background: white;
-    color: #FF8000; 
+    color: #ff8000;
   }
 `;

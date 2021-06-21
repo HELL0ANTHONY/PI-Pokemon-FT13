@@ -1,62 +1,62 @@
 :root {
-  --card-title-bc      : #636874;
+  --card-title-bc: #636874;
   --detail-container-bc: #003348;
-  --sub-title          : #e51a4c;
-  --line-color         : #8a8a8a;
+  --sub-title: #e51a4c;
+  --line-color: #8a8a8a;
 }
 
 .detail--card {
-  display                   : flex;
-  width                     : 700px;
-  height                    : 500px;
-  border-top-right-radius   : 50px;
-  border-bottom-left-radius : 50px;
+  display: flex;
+  width: 700px;
+  height: 500px;
+  border-top-right-radius: 50px;
+  border-bottom-left-radius: 50px;
   border-bottom-right-radius: 20px;
-  -webkit-box-shadow        : 7px 9px 6px -2px rgba(0, 0, 0, 0.55);
-  box-shadow                : 7px 9px 6px -2px rgba(0, 0, 0, 0.55);
+  -webkit-box-shadow: 7px 9px 6px -2px rgba(0, 0, 0, 0.55);
+  box-shadow: 7px 9px 6px -2px rgba(0, 0, 0, 0.55);
 }
 
 .left--side-container {
-  flex                     : 55%;
-  border-top-left-radius   : 50px;
+  flex: 55%;
+  border-top-left-radius: 50px;
   border-bottom-left-radius: 50px;
 }
 
 .left--side-detail {
-  display       : flex;
+  display: flex;
   flex-direction: column;
 }
 
 .img-container {
-  height                : 300px;
-  width                 : 350px;
+  height: 300px;
+  width: 350px;
   border-top-left-radius: 20px;
-  background-size       : cover;
-  background-color      : #bfff00;
+  background-size: cover;
+  background-color: #bfff00;
 }
 
 .card--title {
-  display                  : flex;
-  flex-direction           : column;
-  align-items              : center;
-  justify-content          : center;
-  height                   : 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
   border-bottom-left-radius: 50px;
-  background-color         : var(--card-title-bc);
+  background-color: var(--card-title-bc);
 }
 
 .card--title h1 {
   font-family: "Roboto Mono";
   font-weight: 400;
-  color      : white;
-  text-align : center;
+  color: white;
+  text-align: center;
 }
 
 .right-side-detail {
-  flex                      : 55%;
-  border-top-right-radius   : 50px;
+  flex: 55%;
+  border-top-right-radius: 50px;
   border-bottom-right-radius: 20px;
-  background-color          : var(--detail-container-bc);
+  background-color: var(--detail-container-bc);
 }
 
 .right-side-detail h2 {
@@ -64,49 +64,54 @@
 }
 
 .right-side-detail hr {
-  height          : 1px;
-  width           : 80%;
-  border          : 0;
-  background-image: linear-gradient(to right, rgba(218, 204, 204, 0), rgba(241, 236, 236, 0.75), rgba(0, 0, 0, 0));
+  height: 1px;
+  width: 80%;
+  border: 0;
+  background-image: linear-gradient(
+    to right,
+    rgba(218, 204, 204, 0),
+    rgba(241, 236, 236, 0.75),
+    rgba(0, 0, 0, 0)
+  );
 }
 
 .info-right-side-container {
-  display        : flex;
-  flex-direction : column;
+  display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
-  align-items    : center;
-  font-family    : "Roboto";
-  padding        : 10px;
-  height         : 100%;
+  align-items: center;
+  font-family: "Roboto";
+  padding: 10px;
+  height: 100%;
 }
 
 .temperaments-detail {
-  display        : flex;
-  flex-direction : column;
-  align-items    : center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
 }
 
 .temperaments-detail p {
-  color         : white;
-  padding       : 10px;
+  color: white;
+  padding: 10px;
   text-transform: capitalize;
-  margin-top    : 10px;
-  text-align    : center;
+  margin-top: 10px;
+  text-align: center;
 }
 
 .card-detail {
-  display        : flex;
-  flex-direction : column;
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items    : center;
+  align-items: center;
 }
 
 .card-detail div {
-  display    : flex;
+  display: flex;
   align-items: center;
-  flex-wrap  : wrap;
-  color      : white;
+  flex-wrap: wrap;
+  color: white;
 }
 
 .card-detail div span {
