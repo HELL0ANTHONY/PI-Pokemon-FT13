@@ -15,11 +15,12 @@ async function getPokemons(req, res, next) {
   const order        = req.query.order?.trim();
   const filter       = req.query.filter?.trim();
   const sendPokemons = req.query.sendPokemons?.trim();
+  const pokemonsFrom = req.query.pokemonsFrom?.trim();
 
   if (sendPokemons === undefined && Number.isNaN(page))
     throw new Error("'Page' is not a number");
 
-  const NUMBER_OF_REQUESTS_TO_THE_API = 20;
+  const NUMBER_OF_REQUESTS_TO_THE_API = 10;
 
   if (!cache.getLength()) {
     const promises = [...Array(NUMBER_OF_REQUESTS_TO_THE_API + 1).keys()]
@@ -39,8 +40,12 @@ async function getPokemons(req, res, next) {
     }
   });
 
-  const mergedDatabase = [...pokemonsFromTheDB, ...cache.getValues()];
-
+  let mergedDatabase = [];
+  if (pokemonsFrom !== undefined && pokemonsFrom && pokemonsFrom !== "all") {
+    mergedDatabase = (pokemonsFrom === "api")
+      ? [...cache.getValues()]
+      : [...pokemonsFromTheDB];
+  } else mergedDatabase = [...pokemonsFromTheDB, ...cache.getValues()];
 
   if (sendPokemons !== undefined && sendPokemons && sendPokemons === "ok") {
     return res.json({ data: mergedDatabase });

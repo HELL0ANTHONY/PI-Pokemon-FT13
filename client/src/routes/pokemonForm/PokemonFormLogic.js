@@ -39,7 +39,7 @@ export const PokemonFormLogic = () => {
   }
 
   function cleanForm() {
-    setCheckboxTypes([]); // el checkbox no cambia porque el checked siempre esta en true, por lo que para que resetear hay que cambiarlo a false.
+    setCheckboxTypes([]);
     setInput(initialState());
     setNewInputs([]);
   }

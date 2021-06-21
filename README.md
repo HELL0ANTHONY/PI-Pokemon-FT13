@@ -18,7 +18,7 @@
 
 ## Horarios y Fechas
 
-El proyecto tendrá una duración máxima de tres semanas. En el caso de que completan todas las tareas antes de dicho lapso podrán avisar a su Instructor para coordinar una fecha de presentación del trabajo (DEMO).
+El proyecto tendrá una duración máxima de tres semanas. En el caso de que completen todas las tareas antes de dicho lapso podrán avisar a su Instructor para coordinar una fecha de presentación del trabajo (DEMO).
 
 ## Comenzando
 
@@ -55,11 +55,11 @@ El contenido de `client` fue creado usando: Create React App.
 
 La idea general es crear una aplicación en la cual se puedan ver los distintos Pokemon utilizando la api externa [pokeapi](https://pokeapi.co/) y a partir de ella poder, entre otras cosas:
 
-  - Buscar pokemons
-  - Filtrarlos / Ordenarlos
-  - Crear nuevos pokemons
+- [x] ***Buscar pokemons***
+- [x] ***Filtrarlos / Ordenarlos***
+- [x] ***Crear nuevos pokemons***
 
-> __IMPORTANTE__: *Para las funcionalidades de filtrado y ordenamiento NO pueden utilizar los endpoints de la API externa que ya devuelven los resultados filtrados u ordenados sino que deben realizarlo ustedes mismos. En particular alguno de los ordenamientos o filtrados debe si o si realizarse desde el frontend.*
+> __IMPORTANTE__: *Para las funcionalidades de filtrado y ordenamiento NO pueden utilizar los endpoints de la API externa que ya devuelven los resultados filtrados u ordenados sino que deben realizarlo ustedes mismos. <u>**En particular alguno de los ordenamientos o filtrados debe si o si realizarse desde el frontend.**</u>*
 
 ### Únicos Endpoints/Flags que <u>pueden</u> utilizar
 
@@ -95,7 +95,7 @@ __Ruta principal__: debe contener
   - Nombre
   - Tipos (Eléctrico, Fuego, Agua, etc)
 - [ ] Botones/Opciones para filtrar por tipo de pokemon y por pokemon existente o creado por nosotros
-- [ ] Botones/Opciones para ordenar tanto ascendentemente como descendentemente los pokemons por orden alfabético y por fuerza
+- [x] Botones/Opciones para ordenar tanto ascendentemente como descendentemente los pokemons por orden alfabético y por fuerza
 - [x] Paginado para ir buscando y mostrando los siguientes pokemones
 
 > __IMPORTANTE__: *Dentro de la Ruta Principal se deben mostrar tanto los pokemones traídos desde la API como así también las de la base de datos. **Por otro lado, si revisan el endpoint que trae todos los pokemones verán que no muestra la información del pokemon sino una URL para hacer un subrequest y obtener los datos de allí. Tendrán que por cada pokemon que van a mostrar hacer otro request a esa URL para obtener su imagen y tipos.*** ***Debido a que esto puede hacer que la búsqueda sea muy lenta limitar el resultado total a 40 pokemons totales.***
