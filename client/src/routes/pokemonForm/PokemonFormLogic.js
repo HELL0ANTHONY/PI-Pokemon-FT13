@@ -24,9 +24,10 @@ export const PokemonFormLogic = () => {
   function newPokemonAttributes() {
     const { name, image, ...numberValues } = input;
     const newTypes = newInputs
-      .filter((t) => t.trim() && isNaN(t.trim()))
-      .map((t) => ({ name: t }));
-    const existingTypes = checkboxTypes.map((type) => ({ name: type }));
+      .filter(t => t.trim() && isNaN(t.trim()))
+      .map(t => ({ name: t }));
+
+    const existingTypes = checkboxTypes.map(type => ({ name: type }));
     const numbers = Object.fromEntries(
       Object.entries(numberValues).map(([key, value]) => [key, +value])
     );
@@ -59,15 +60,15 @@ export const PokemonFormLogic = () => {
       title: "Add the new pokemon types",
       newInputs,
       isOpen: isOpenModalNewTypes,
-      openModal: (event) => {
+      openModal: event => {
         event.preventDefault();
         openModalNewTypes();
       },
-      closeModal: (event) => {
+      closeModal: event => {
         event.preventDefault();
         closeModalNewTypes();
       },
-      addNewInput: (event) => {
+      addNewInput: event => {
         event.preventDefault();
         setNewInputs([...newInputs, ""]);
       },
@@ -90,15 +91,15 @@ export const PokemonFormLogic = () => {
       name: checkboxTypes,
       title: "Select Pokemon Types",
       isOpen: isOpenModalOfTypes,
-      closeModal: (event) => {
+      closeModal: event => {
         event.preventDefault();
         closeModalOfTypes();
       },
-      openModal: (event) => {
+      openModal: event => {
         event.preventDefault();
         openModalOfTypes();
       },
-      onChange: (event) => {
+      onChange: event => {
         event.preventDefault();
         if (event.target.checked) {
           setCheckboxTypes([...checkboxTypes, event.target.value]);

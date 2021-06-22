@@ -11,10 +11,17 @@ import Select from "../../components/Select";
 import { Selects } from "./Home.styles.js";
 
 const Home = () => {
-  const { modalSearchAttributes, handleFilter, handleOrder, handleSortOption } =
-    HomeLogic();
+  const {
+    modalSearchAttributes,
+    handleFilter,
+    handleOrder,
+    handleSortOption,
+    handlePokemonsFromWhatDb,
+  } = HomeLogic();
 
-  const { sortBy, filter, order, pokemonTypes } = useSelector((state) => state);
+  const { sortBy, filter, order, pokemonTypes, pokemonsFrom } = useSelector(
+    state => state
+  );
   const arrayOfTypes = pokemonTypes?.data?.map(({ name }) => name);
   const dispatch = useDispatch();
 
@@ -25,7 +32,7 @@ const Home = () => {
     ...rest
   } = modalSearchAttributes();
 
-  const handleSearch = (event) => {
+  const handleSearch = event => {
     event.preventDefault();
     const name = pokemonName.trim();
     if (name) {
@@ -68,6 +75,14 @@ const Home = () => {
               values={["all", ...arrayOfTypes]}
             />
           )}
+        </span>
+        <span>
+          From:
+          <Select
+            initialValue={pokemonsFrom}
+            onChange={handlePokemonsFromWhatDb}
+            values={["all", "database", "api"]}
+          />
         </span>
         <div>
           <button type="submit" onClick={openModal}>

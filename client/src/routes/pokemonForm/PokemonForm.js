@@ -39,7 +39,7 @@ const PokemonForm = ({
     getPokemonTypes();
   }, [getPokemonTypes]);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault();
     if (!Object.entries(errors).length) {
       createPokemon(newPokemonAttributes());
@@ -98,9 +98,9 @@ const mapStateToProps = ({ newPokemon, pokemonTypes }) => ({
   pokemonTypes,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  createPokemon: (object) => dispatch(fetchNewPokemon(object)),
-  getPokemonTypes: (_) => dispatch(fetchPokemonTypes()),
+const mapDispatchToProps = dispatch => ({
+  createPokemon: object => dispatch(fetchNewPokemon(object)),
+  getPokemonTypes: _ => dispatch(fetchPokemonTypes()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PokemonForm);

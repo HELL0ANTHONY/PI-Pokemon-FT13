@@ -3,6 +3,7 @@ import {
   GO_TO_PAGE,
   FETCH_ERROR,
   CHANGE_ORDER,
+  FILTER_FOR_DB,
   CLEAN_DETAILS,
   FETCH_PENDING,
   FETCH_POKEMONS,
@@ -19,11 +20,12 @@ const initialState = {
   filter: "all",
   sortBy: "default",
   pending: false,
-  pokemons: undefined,
+  kemons: undefined,
   newPokemon: undefined,
   currentPage: 1,
   pokemonById: undefined,
   pokemonTypes: undefined,
+  pokemonsFrom: "all",
 };
 
 const pokeByName = (array, name) => {
@@ -100,6 +102,11 @@ export function rootReducer(state = initialState, { type, payload, error }) {
       return {
         ...state,
         filter: payload,
+      };
+    case FILTER_FOR_DB:
+      return {
+        ...state,
+        pokemonsFrom: payload,
       };
     default:
       return state;

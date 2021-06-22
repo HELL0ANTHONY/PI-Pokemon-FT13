@@ -3,6 +3,7 @@ import {
   GO_TO_PAGE,
   FETCH_ERROR,
   CHANGE_ORDER,
+  FILTER_FOR_DB,
   CLEAN_DETAILS,
   FETCH_PENDING,
   FETCH_POKEMONS,
@@ -12,6 +13,11 @@ import {
   FETCH_POKEMON_BY_ID,
   FETCH_POKEMON_BY_NAME,
 } from "../constants";
+
+export const filterForDB = payload => ({
+  type: FILTER_FOR_DB,
+  payload,
+});
 
 export const cleanDetails = payload => ({
   type: CLEAN_DETAILS,

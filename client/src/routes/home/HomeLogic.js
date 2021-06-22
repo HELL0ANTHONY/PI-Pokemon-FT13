@@ -6,6 +6,7 @@ import {
   setSortBy,
   changeOrder,
   filterByType,
+  filterForDB,
 } from "../../redux/actions/actions";
 
 export const HomeLogic = () => {
@@ -14,11 +15,17 @@ export const HomeLogic = () => {
   const dispatch = useDispatch();
 
   return {
-    modalSearchAttributes,
     handleOrder,
-    handleSortOption,
     handleFilter,
+    handleSortOption,
+    modalSearchAttributes,
+    handlePokemonsFromWhatDb,
   };
+
+  function handlePokemonsFromWhatDb(event) {
+    event.preventDefault();
+    dispatch(filterForDB(event.target.value));
+  }
 
   function handleOrder(event) {
     event.preventDefault();
@@ -40,16 +47,16 @@ export const HomeLogic = () => {
       name: "pokemonName",
       value: searchByName,
       isOpen: isOpenSearchModal,
-      openModal: (event) => {
+      openModal: event => {
         event.preventDefault();
         openSearchModal();
       },
-      closeModal: (event) => {
+      closeModal: event => {
         event.preventDefault();
         closeSearchModal();
         setSearchByName("");
       },
-      onChange: (event) => {
+      onChange: event => {
         event.preventDefault();
         setSearchByName(event.target.value);
       },

@@ -11,7 +11,7 @@ import {
 } from "./Card.styles";
 
 const Card = ({ id, name, image, types }) => {
-  const sliceId = (id) => id.slice(0, 8).concat("...");
+  const sliceId = id => id.slice(0, 8).concat("...");
 
   return (
     <Main>
@@ -28,7 +28,7 @@ const Card = ({ id, name, image, types }) => {
           </Id>
           <h2>{`${name}'s types`}</h2>
           <List>
-            {types.map((type, index) => (
+            {types.slice(0, 4).map((type, index) => (
               <li key={index}>{type.name}</li>
             ))}
           </List>

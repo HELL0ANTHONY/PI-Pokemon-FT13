@@ -8,9 +8,8 @@ import { printCards } from "../../helpers/printCards";
 import { Cards } from "./CardsWithPagination.styles.js";
 
 const CardsWithPagination = ({ fetchPokemons }) => {
-  const { currentPage, pokemons, sortBy, order, filter } = useSelector(
-    state => state
-  );
+  const { currentPage, pokemons, sortBy, order, filter, pokemonsFrom } =
+    useSelector(state => state);
   const totalPages = pokemons?.paginationData?.totalPages;
 
   const paginate = pageNumber => dispatch(goToPage(pageNumber));
@@ -18,9 +17,9 @@ const CardsWithPagination = ({ fetchPokemons }) => {
 
   useEffect(() => {
     fetchPokemons(
-      `http://localhost:3001/pokemons?page=${currentPage}&sort=${sortBy}&order=${order}&filter=${filter}`
+      `http://localhost:3001/pokemons?page=${currentPage}&sort=${sortBy}&order=${order}&filter=${filter}&pokemonsFrom=${pokemonsFrom}`
     );
-  }, [fetchPokemons, currentPage, sortBy, filter, order]);
+  }, [fetchPokemons, currentPage, sortBy, filter, order, pokemonsFrom]);
 
   const printPagination = _ => {
     return (
