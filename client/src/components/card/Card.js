@@ -10,7 +10,7 @@ import {
   Id,
 } from "./Card.styles";
 
-const Card = ({ id, name, image, types }) => {
+const Card = ({ id, name, types, image }) => {
   const sliceId = id => id.slice(0, 8).concat("...");
 
   return (
