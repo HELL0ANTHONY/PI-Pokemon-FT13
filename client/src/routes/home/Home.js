@@ -9,6 +9,7 @@ import SearchModal from "../../components/modals/modalSearch/SearchModal";
 import CardsWithPagination from "../../components/cardsWithPagination/CardsWithPagination";
 import Select from "../../components/Select";
 import { Selects } from "./Home.styles.js";
+import SearchResult from "../../components/searchResult/SearchResult";
 
 const Home = () => {
   const {
@@ -48,6 +49,7 @@ const Home = () => {
 
   return (
     <>
+      <SearchResult />
       <CardsWithPagination />
       <Selects>
         <span>

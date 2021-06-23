@@ -1,4 +1,4 @@
-export const pokemonFormValidation = (input) => {
+export const pokemonFormValidation = input => {
   const errors = {};
   const regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
   const regexNameSize = /^.{1,255}$/;
@@ -12,10 +12,6 @@ export const pokemonFormValidation = (input) => {
   } else if (!regexNameSize.test(name.trim())) {
     errors.name = "The name field cannot exceed 255 characters";
   }
-
-  /* if (!isNaN(image.trim())) {
-    errors.image = "Image field only accepts characters, not numerics"; 
-  } */
 
   for (const [key, value] of Object.entries(stats)) {
     if (value < 0) {

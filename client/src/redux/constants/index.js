@@ -11,3 +11,4 @@ export const FILTER_BY_TYPE = "FILTER_BY_TYPE";
 export const GO_TO_PAGE = "GO_TO_PAGE";
 export const CLEAN_DETAILS = "CLEAN_DETAILS";
 export const FILTER_FOR_DB = "FILTER_FOR_DB";
+export const CLEAN_POKEMON_BY_NAME = "CLEAN_POKEMON_BY_NAME";

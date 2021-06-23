@@ -12,6 +12,7 @@ import {
   FETCH_POKEMON_BY_ID,
   FETCH_POKEMON_TYPES,
   FETCH_POKEMON_BY_NAME,
+  CLEAN_POKEMON_BY_NAME,
 } from "../constants";
 
 const initialState = {
@@ -26,6 +27,7 @@ const initialState = {
   pokemonById: undefined,
   pokemonTypes: undefined,
   pokemonsFrom: "all",
+  pokemonByName: undefined,
 };
 
 const pokeByName = (array, name) => {
@@ -86,7 +88,12 @@ export function rootReducer(state = initialState, { type, payload, error }) {
       return {
         ...state,
         pending: false,
-        pokemons: pokeByName(payload.json.data, payload.name),
+        pokemonByName: pokeByName(payload.json.data, payload.name),
+      };
+    case CLEAN_POKEMON_BY_NAME:
+      return {
+        ...state,
+        pokemonByName: payload,
       };
     case SORT_BY:
       return {

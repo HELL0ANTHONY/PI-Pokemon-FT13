@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import fetchNewPokemon from "../../redux/reducers/postTheNewPokemon";
 import fetchPokemonTypes from "../../redux/reducers/fetchPokemonTypes";
 
@@ -10,12 +10,9 @@ import CheckboxModal from "../../components/modals/checkboxModal/CheckboxModal";
 import AddTypesModal from "../../components/modals/addTypesModal/AddTypesModal";
 import "./pokemonForm.css";
 
-const PokemonForm = ({
-  createPokemon,
-  getPokemonTypes,
-  newPokemon,
-  pokemonTypes,
-}) => {
+const PokemonForm = () => {
+  const { pokemonTypes } = useSelector(state => state);
+  const dispatch = useDispatch();
   const {
     inputAttributes,
     checkboxLogic,
@@ -36,13 +33,13 @@ const PokemonForm = ({
   const inputs = inputAttributes();
 
   useEffect(() => {
-    getPokemonTypes();
-  }, [getPokemonTypes]);
+    dispatch(fetchPokemonTypes());
+  }, [dispatch]);
 
   const handleSubmit = event => {
     event.preventDefault();
     if (!Object.entries(errors).length) {
-      createPokemon(newPokemonAttributes());
+      dispatch(fetchNewPokemon(newPokemonAttributes()));
       cleanForm();
       return alert("success!");
     } else {
@@ -54,8 +51,7 @@ const PokemonForm = ({
     <form className="create" onSubmit={handleSubmit}>
       <div>
         <h1>Create your new Pokemon</h1>
-        <p>Please fill in this form to create a new Pokemon.</p>
-        <hr />
+        <p>Please fill in this form to create a new Pokemon.</p> <hr />
         {inputs.map((input, index) => (
           <Input key={index} {...input} />
         ))}
@@ -93,14 +89,9 @@ const PokemonForm = ({
   );
 };
 
-const mapStateToProps = ({ newPokemon, pokemonTypes }) => ({
-  newPokemon,
-  pokemonTypes,
-});
+export default PokemonForm;
 
-const mapDispatchToProps = dispatch => ({
-  createPokemon: object => dispatch(fetchNewPokemon(object)),
-  getPokemonTypes: _ => dispatch(fetchPokemonTypes()),
-});
+/*
 
-export default connect(mapStateToProps, mapDispatchToProps)(PokemonForm);
+
+*/

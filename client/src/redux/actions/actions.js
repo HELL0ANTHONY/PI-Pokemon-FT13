@@ -12,6 +12,7 @@ import {
   FETCH_POKEMON_TYPES,
   FETCH_POKEMON_BY_ID,
   FETCH_POKEMON_BY_NAME,
+  CLEAN_POKEMON_BY_NAME,
 } from "../constants";
 
 export const filterForDB = payload => ({
@@ -19,8 +20,13 @@ export const filterForDB = payload => ({
   payload,
 });
 
-export const cleanDetails = payload => ({
+export const cleanDetails = () => ({
   type: CLEAN_DETAILS,
+  payload: undefined,
+});
+
+export const cleanPokemonByName = () => ({
+  type: CLEAN_POKEMON_BY_NAME,
   payload: undefined,
 });
 
