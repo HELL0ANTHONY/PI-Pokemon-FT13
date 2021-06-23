@@ -25,8 +25,8 @@ const CardDetails = ({
               className="img-container"
             />
             <div className="card--title">
-              <h1>{name}</h1>
-              <h3>ID: {id}</h3>
+              <h1 className="poke-name">{name}</h1>
+              <h3 className="poke-id">ID: {id}</h3>
             </div>
           </div>
         </div>
@@ -38,7 +38,6 @@ const CardDetails = ({
             </div>
             <hr />
             <div className="card-detail">
-              <h2>Height</h2>
               <div>
                 <span>Height</span>
                 <span>{height ?? "No detail"}</span>
@@ -49,7 +48,6 @@ const CardDetails = ({
             </div>
             <hr />
             <div className="card-detail">
-              <h2>Weight</h2>
               <div>
                 <span>Hp:</span>
                 <span>{hp ?? "No detail"}</span>
@@ -60,7 +58,6 @@ const CardDetails = ({
             </div>
             <hr />
             <div className="card-detail">
-              <h2>Life Span</h2>
               <div>
                 <span>Defense:</span>
                 <span>{defense ?? "No detail"}</span>

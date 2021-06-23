@@ -117,3 +117,13 @@
 .card-detail div span {
   margin: 5px;
 }
+
+.poke-name {
+  text-transform: capitalize;
+  margin-bottom: 5px;
+}
+
+.poke-id {
+  padding: 10% auto;
+  color: white;
+}
