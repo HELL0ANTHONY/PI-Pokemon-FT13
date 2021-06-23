@@ -7,7 +7,7 @@ export const Selects = styled.div`
   align-items: center;
   font-size: 20px;
   position: absolute;
-  top: 2px;
+  top: 195px;
   right: 80px;
 
   span {

@@ -5,6 +5,18 @@ export const PaginationBox = styled.div`
   ${flex("center", "center")};
   color: white;
   width: 100%;
+
+  span {
+    padding: 4px;
+    border-radius: 3px;
+    font-size: 20px;
+    background: #2e2956;
+    color: white;
+
+    strong {
+      color: orange;
+    }
+  }
 `;
 
 export const PaginationList = styled.ul`

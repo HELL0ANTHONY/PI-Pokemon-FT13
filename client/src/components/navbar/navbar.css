@@ -18,12 +18,12 @@
   width: 100%;
 }
 
-/*.imgBox {
-  background     : greenyellow url("../../img/nav.jpg") no-repeat;
+.imgBox {
+  background     : greenyellow url("../../img/poke.jpg") no-repeat;
   background-size: cover;
   display        : flex;
-  height         : 55vh;
-}*/
+  height         : 30vh;
+}
 
 button:hover {
   cursor: pointer;
