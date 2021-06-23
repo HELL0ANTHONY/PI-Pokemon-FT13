@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const ResultContainer = styled.div`
   width: 100vw;
-  height: 60vh;
+  height: 70vh;
   display: ${({ isPokemon }) => (isPokemon === undefined ? "none" : "block")};
 
   h1 {
@@ -19,6 +19,10 @@ export const CardContainer = styled.div`
   max-width: 100%;
   height: 100%;
   position: relative;
+
+  div {
+    margin: 10px;
+  }
 `;
 
 export const BtnPosition = styled.div`
