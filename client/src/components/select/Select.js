@@ -1,4 +1,4 @@
-import { titleCase } from "../helpers/titleCase";
+import { titleCase } from "../../helpers/titleCase";
 import { SelectStyles } from "./Select.styles.js";
 
 const Select = ({ initialValue, onChange, values }) => {

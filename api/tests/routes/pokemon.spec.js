@@ -1,13 +1,22 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const { expect } = require('chai');
 const session = require('supertest-session');
+const supertest = require("supertest");
 const app = require('../../src/app.js');
 const { Pokemon, conn } = require('../../src/db.js');
 
 const agent = session(app);
+const api = supertest(app);
 const pokemon = {
   name: 'Pikachu',
 };
+
+test('types are returned as json', async () => {
+  await api
+    .get('/types')
+    .expect(200)
+    .expect('Content-Type', /application\/json/)
+})
 
 describe('Pokemon routes', () => {
   before(() => conn.authenticate()

@@ -1,6 +1,6 @@
 const Sort                        = require("./Sort");
 const Cache                       = require("./Cache");
-const fetchData                   = require("../../helper/fetchData"); 
+const fetchData                   = require("../../helper/fetchData");
 const pagination                  = require("./pagination");
 const { Pokemon, Type }           = require("../../db");
 const { pokemonById: endpoint }   = require("../../constants");
@@ -20,7 +20,7 @@ async function getPokemons(req, res, next) {
   if (sendPokemons === undefined && Number.isNaN(page))
     throw new Error("'Page' is not a number");
 
-  const NUMBER_OF_REQUESTS_TO_THE_API = 10;
+  const NUMBER_OF_REQUESTS_TO_THE_API = 20;
 
   if (!cache.getLength()) {
     const promises = [...Array(NUMBER_OF_REQUESTS_TO_THE_API + 1).keys()]
@@ -28,7 +28,7 @@ async function getPokemons(req, res, next) {
     const listOfPokemons     = await Promise.all(promises);
     const pokemonsFromTheApi = filteringAndSortingData(listOfPokemons);
     cache.setValue(pokemonsFromTheApi);
-  } 
+  }
 
   const pokemonsFromTheDB = await Pokemon.findAll({
     include: {
@@ -63,8 +63,8 @@ async function getPokemons(req, res, next) {
       ? Sort.byName(pokemons, order)
       : Sort.byForce(pokemons, order);
   } else {
-    pokemonsSorted = (order === "asc") 
-      ? [...pokemons] 
+    pokemonsSorted = (order === "asc")
+      ? [...pokemons]
       : [...pokemons].reverse();
   }
 

@@ -7,7 +7,7 @@ import fetchPokemonTypes from "../../redux/reducers/fetchPokemonTypes";
 import { HomeLogic } from "./HomeLogic";
 import SearchModal from "../../components/modals/modalSearch/SearchModal";
 import CardsWithPagination from "../../components/cardsWithPagination/CardsWithPagination";
-import Select from "../../components/Select";
+import Select from "../../components/select/Select";
 import { Selects } from "./Home.styles.js";
 import SearchResult from "../../components/searchResult/SearchResult";
 

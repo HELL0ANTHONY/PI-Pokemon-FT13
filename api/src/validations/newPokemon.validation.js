@@ -1,11 +1,9 @@
-const { isBlank } = require("../helper/isBlank");
-
 const regexs = {
   str: /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/
 };
 
 const errorMessage = message => {
-  throw new Error (message);
+  throw new Error(message);
 };
 
 function checkTypes(types) {
