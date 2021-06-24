@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import fetchNewPokemon from "../../redux/reducers/postTheNewPokemon";
 import fetchPokemonTypes from "../../redux/reducers/fetchPokemonTypes";
@@ -36,15 +36,46 @@ const PokemonForm = () => {
     dispatch(fetchPokemonTypes());
   }, [dispatch]);
 
+  const [selectPokemonTypes, setSelectPokemonTypes] = useState({
+    pokeTypes: [],
+  });
+
   const handleSubmit = event => {
     event.preventDefault();
+    const { types, ...rest } = newPokemonAttributes();
+    const selectedTypes = selectPokemonTypes.pokeTypes.map(e => ({ name: e }));
+
+    const pokemonTypes = [...types, ...selectedTypes];
+
     if (!Object.entries(errors).length) {
-      dispatch(fetchNewPokemon(newPokemonAttributes()));
+      //dispatch(fetchNewPokemon(newPokemonAttributes()));
+      dispatch(fetchNewPokemon({ ...rest, types: pokemonTypes }));
+      setSelectPokemonTypes({ pokeTypes: [] });
       cleanForm();
       return alert("success!");
     } else {
       return alert("Something went wrong. Please check your data");
     }
+  };
+
+  const handleSelect = event => {
+    event.preventDefault();
+    let types = [];
+    const options = event.target.options;
+    for (let i = 0, l = options.length; i < l; i++) {
+      if (options[i].selected) {
+        types.push(options[i].value);
+      }
+    }
+    setSelectPokemonTypes({
+      pokeTypes: [...selectPokemonTypes.pokeTypes, ...types],
+    });
+  };
+
+  const handleDeleteSelect = value => {
+    setSelectPokemonTypes(prevState => ({
+      pokeTypes: prevState.pokeTypes.filter(type => type !== value),
+    }));
   };
 
   return (
@@ -55,6 +86,34 @@ const PokemonForm = () => {
         {inputs.map((input, index) => (
           <Input key={index} {...input} />
         ))}
+      </div>
+
+      <div>
+        <ul
+          style={{
+            display: `${
+              selectPokemonTypes.pokeTypes.length ? "block" : "none"
+            }`,
+          }}
+        >
+          {selectPokemonTypes.pokeTypes.map((type, index) => (
+            <li onClick={() => handleDeleteSelect(type)} key={index}>
+              {type}
+            </li>
+          ))}
+        </ul>
+        <select
+          multiple={true}
+          value={selectPokemonTypes.pokeTypes}
+          onChange={handleSelect}
+        >
+          {pokemonTypes &&
+            pokemonTypes?.data.map(({ name, id }) => (
+              <option key={id} value={name}>
+                {name}
+              </option>
+            ))}
+        </select>
       </div>
 
       <CheckboxModal list={pokemonTypes} {...modalCheckboxAttributes} />
@@ -90,8 +149,3 @@ const PokemonForm = () => {
 };
 
 export default PokemonForm;
-
-/*
-
-
-*/
