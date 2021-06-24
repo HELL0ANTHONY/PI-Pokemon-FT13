@@ -6,7 +6,7 @@ import fetchPokemonTypes from "../../redux/reducers/fetchPokemonTypes";
 import { PokemonFormLogic } from "./PokemonFormLogic";
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
-import CheckboxModal from "../../components/modals/checkboxModal/CheckboxModal";
+// import CheckboxModal from "../../components/modals/checkboxModal/CheckboxModal";
 import AddTypesModal from "../../components/modals/addTypesModal/AddTypesModal";
 import "./pokemonForm.css";
 
@@ -15,7 +15,7 @@ const PokemonForm = () => {
   const dispatch = useDispatch();
   const {
     inputAttributes,
-    checkboxLogic,
+    //  checkboxLogic,
     createNewTypesLogic,
     newPokemonAttributes,
     cleanForm,
@@ -28,7 +28,7 @@ const PokemonForm = () => {
     ...newTypesModalAttributes
   } = createNewTypesLogic();
 
-  const { openModal, ...modalCheckboxAttributes } = checkboxLogic();
+  // const { openModal, ...modalCheckboxAttributes } = checkboxLogic();
 
   const inputs = inputAttributes();
 
@@ -44,11 +44,9 @@ const PokemonForm = () => {
     event.preventDefault();
     const { types, ...rest } = newPokemonAttributes();
     const selectedTypes = selectPokemonTypes.pokeTypes.map(e => ({ name: e }));
-
     const pokemonTypes = [...types, ...selectedTypes];
 
     if (!Object.entries(errors).length) {
-      //dispatch(fetchNewPokemon(newPokemonAttributes()));
       dispatch(fetchNewPokemon({ ...rest, types: pokemonTypes }));
       setSelectPokemonTypes({ pokeTypes: [] });
       cleanForm();
@@ -116,7 +114,7 @@ const PokemonForm = () => {
         </select>
       </div>
 
-      <CheckboxModal list={pokemonTypes} {...modalCheckboxAttributes} />
+      {/*<CheckboxModal list={pokemonTypes} {...modalCheckboxAttributes} /> */}
       <AddTypesModal {...newTypesModalAttributes} />
 
       <div className="buttons">
@@ -128,13 +126,13 @@ const PokemonForm = () => {
           Add New Types
         </Button>
 
-        <Button
+        {/*<Button
           onClick={openModal}
           buttonSize="btn-medium"
           buttonStyle="btn--success--solid"
         >
           Select Types
-        </Button>
+        </Button> */}
 
         <Button
           type="submit"

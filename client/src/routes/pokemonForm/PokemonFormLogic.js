@@ -27,7 +27,6 @@ export const PokemonFormLogic = () => {
       .filter(t => t.trim() && isNaN(t.trim()))
       .map(t => ({ name: t }));
 
-    // const existingTypes = checkboxTypes.map(type => ({ name: type }));
     const numbers = Object.fromEntries(
       Object.entries(numberValues).map(([key, value]) => [key, +value])
     );
@@ -36,7 +35,6 @@ export const PokemonFormLogic = () => {
       image,
       ...numbers,
       types: [...newTypes],
-      //types: [...existingTypes, ...newTypes],
     };
   }
 
