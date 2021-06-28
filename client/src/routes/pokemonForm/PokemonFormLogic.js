@@ -1,32 +1,83 @@
 import { useState } from "react";
 import { useModal } from "../../hooks/useModal";
 import { pokemonFormValidation } from "../../validations/pokemonFormValidation";
+import { useDispatch } from "react-redux";
+import fetchNewPokemon from "../../redux/reducers/postTheNewPokemon";
+
+function initialState() {
+  return {
+    name: "",
+    speed: "",
+    hp: "",
+    defense: "",
+    height: "",
+    weight: "",
+    baseExperience: "",
+    image: "",
+  };
+}
 
 export const PokemonFormLogic = () => {
-  const [input, setInput] = useState(initialState());
+  const dispatch = useDispatch();
   const [errors, setErrors] = useState({});
   const [newInputs, setNewInputs] = useState([]);
-  const [checkboxTypes, setCheckboxTypes] = useState([]);
-
-  const [isOpenModalOfTypes, openModalOfTypes, closeModalOfTypes] = useModal();
+  const [input, setInput] = useState(initialState());
+  const [selectPokemonTypes, setSelectPokemonTypes] = useState({
+    pokeTypes: [],
+  });
   const [isOpenModalNewTypes, openModalNewTypes, closeModalNewTypes] =
     useModal();
 
   return {
+    handleSubmit,
+    setSelectPokemonTypes,
+    selectPokemonTypes,
+    selectLogic,
     inputAttributes,
-    checkboxLogic,
-    createNewTypesLogic,
-    newPokemonAttributes,
-    cleanForm,
-    errors,
+    createNewTypesLogic
   };
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    if (!Object.entries(errors).length) {
+      dispatch(fetchNewPokemon(newPokemonAttributes()));
+      cleanForm();
+      return alert("success!");
+    } else {
+      return alert("Something went wrong. Please check your data");
+    }
+  }
+
+  function selectLogic() {
+    return {
+      handleSelect(event) {
+        event.preventDefault();
+        let types = [];
+        const options = event.target.options;
+        for (let i = 0, l = options.length; i < l; i++) {
+          if (options[i].selected) {
+            types.push(options[i].value);
+          }
+        }
+        setSelectPokemonTypes({
+          pokeTypes: [...selectPokemonTypes.pokeTypes, ...types],
+        });
+      },
+      handleDeleteSelect(value) {
+        setSelectPokemonTypes(prevState => ({
+          pokeTypes: prevState.pokeTypes.filter(type => type !== value),
+        }));
+      }
+    };
+  }
 
   function newPokemonAttributes() {
     const { name, image, ...numberValues } = input;
     const newTypes = newInputs
       .filter(t => t.trim() && isNaN(t.trim()))
       .map(t => ({ name: t }));
-
+    const typesFromTheSelect = selectPokemonTypes.pokeTypes
+      .map(e => ({ name: e }));
     const numbers = Object.fromEntries(
       Object.entries(numberValues).map(([key, value]) => [key, +value])
     );
@@ -34,13 +85,13 @@ export const PokemonFormLogic = () => {
       name,
       image,
       ...numbers,
-      types: [...newTypes],
+      types: [...newTypes, ...typesFromTheSelect],
     };
   }
 
   function cleanForm() {
-    setCheckboxTypes([]);
     setInput(initialState());
+    setSelectPokemonTypes({ pokeTypes: [] });
     setNewInputs([]);
   }
 
@@ -80,29 +131,6 @@ export const PokemonFormLogic = () => {
         event.preventDefault();
         newInputs[index] = event.target.value;
         setNewInputs([...newInputs]);
-      },
-    };
-  }
-
-  function checkboxLogic() {
-    return {
-      checkboxTypes,
-      name: checkboxTypes,
-      title: "Select Pokemon Types",
-      isOpen: isOpenModalOfTypes,
-      closeModal: event => {
-        event.preventDefault();
-        closeModalOfTypes();
-      },
-      openModal: event => {
-        event.preventDefault();
-        openModalOfTypes();
-      },
-      onChange: event => {
-        event.preventDefault();
-        if (event.target.checked) {
-          setCheckboxTypes([...checkboxTypes, event.target.value]);
-        }
       },
     };
   }
@@ -176,16 +204,3 @@ export const PokemonFormLogic = () => {
     ];
   }
 };
-
-function initialState() {
-  return {
-    name: "",
-    speed: "",
-    hp: "",
-    defense: "",
-    height: "",
-    weight: "",
-    baseExperience: "",
-    image: "",
-  };
-}

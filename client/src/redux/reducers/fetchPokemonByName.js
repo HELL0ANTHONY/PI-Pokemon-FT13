@@ -5,7 +5,7 @@ import {
 } from "../actions/actions";
 
 function getPokemonByName(name) {
-  return async (dispatch) => {
+  return async dispatch => {
     try {
       dispatch(fetchPending());
       const res = await fetch(`http://localhost:3001/pokemons?sendPokemons=ok`);

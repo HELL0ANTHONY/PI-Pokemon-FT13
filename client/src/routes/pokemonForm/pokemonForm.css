@@ -45,3 +45,7 @@ p {
   font-size: 20px;
   font-style: bold;
 }
+
+.list-types {
+  list-style: none;
+}

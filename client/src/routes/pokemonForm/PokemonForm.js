@@ -1,80 +1,32 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import fetchNewPokemon from "../../redux/reducers/postTheNewPokemon";
 import fetchPokemonTypes from "../../redux/reducers/fetchPokemonTypes";
 
 import { PokemonFormLogic } from "./PokemonFormLogic";
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
-// import CheckboxModal from "../../components/modals/checkboxModal/CheckboxModal";
 import AddTypesModal from "../../components/modals/addTypesModal/AddTypesModal";
 import "./pokemonForm.css";
 
 const PokemonForm = () => {
-  const { pokemonTypes } = useSelector(state => state);
-  const dispatch = useDispatch();
   const {
+    handleSubmit,
+    selectLogic,
+    selectPokemonTypes,
     inputAttributes,
-    //  checkboxLogic,
-    createNewTypesLogic,
-    newPokemonAttributes,
-    cleanForm,
-    errors,
+    createNewTypesLogic
   } = PokemonFormLogic();
 
-  const {
-    checkboxTypes,
-    openModal: openModalOfNewTypes,
-    ...newTypesModalAttributes
-  } = createNewTypesLogic();
-
-  // const { openModal, ...modalCheckboxAttributes } = checkboxLogic();
-
+  const dispatch = useDispatch();
   const inputs = inputAttributes();
+  const { pokemonTypes } = useSelector(state => state);
+  const { openModal: openModalOfNewTypes, ...newTypesModalAttributes } =
+    createNewTypesLogic();
+  const { handleSelect, handleDeleteSelect } = selectLogic();
 
   useEffect(() => {
     dispatch(fetchPokemonTypes());
   }, [dispatch]);
-
-  const [selectPokemonTypes, setSelectPokemonTypes] = useState({
-    pokeTypes: [],
-  });
-
-  const handleSubmit = event => {
-    event.preventDefault();
-    const { types, ...rest } = newPokemonAttributes();
-    const selectedTypes = selectPokemonTypes.pokeTypes.map(e => ({ name: e }));
-    const pokemonTypes = [...types, ...selectedTypes];
-
-    if (!Object.entries(errors).length) {
-      dispatch(fetchNewPokemon({ ...rest, types: pokemonTypes }));
-      setSelectPokemonTypes({ pokeTypes: [] });
-      cleanForm();
-      return alert("success!");
-    } else {
-      return alert("Something went wrong. Please check your data");
-    }
-  };
-
-  const handleSelect = event => {
-    event.preventDefault();
-    let types = [];
-    const options = event.target.options;
-    for (let i = 0, l = options.length; i < l; i++) {
-      if (options[i].selected) {
-        types.push(options[i].value);
-      }
-    }
-    setSelectPokemonTypes({
-      pokeTypes: [...selectPokemonTypes.pokeTypes, ...types],
-    });
-  };
-
-  const handleDeleteSelect = value => {
-    setSelectPokemonTypes(prevState => ({
-      pokeTypes: prevState.pokeTypes.filter(type => type !== value),
-    }));
-  };
 
   return (
     <form className="create" onSubmit={handleSubmit}>
@@ -88,10 +40,10 @@ const PokemonForm = () => {
 
       <div>
         <ul
+          className="list-types"
           style={{
-            display: `${
-              selectPokemonTypes.pokeTypes.length ? "block" : "none"
-            }`,
+            display: `${selectPokemonTypes.pokeTypes.length ? "block" : "none"
+              }`,
           }}
         >
           {selectPokemonTypes.pokeTypes.map((type, index) => (
@@ -114,7 +66,6 @@ const PokemonForm = () => {
         </select>
       </div>
 
-      {/*<CheckboxModal list={pokemonTypes} {...modalCheckboxAttributes} /> */}
       <AddTypesModal {...newTypesModalAttributes} />
 
       <div className="buttons">
@@ -125,15 +76,6 @@ const PokemonForm = () => {
         >
           Add New Types
         </Button>
-
-        {/*<Button
-          onClick={openModal}
-          buttonSize="btn-medium"
-          buttonStyle="btn--success--solid"
-        >
-          Select Types
-        </Button> */}
-
         <Button
           type="submit"
           buttonSize="btn-medium"
