@@ -20,7 +20,7 @@ async function getPokemons(req, res, next) {
   if (sendPokemons === undefined && Number.isNaN(page))
     throw new Error("'Page' is not a number");
 
-  const NUMBER_OF_REQUESTS_TO_THE_API = 20;
+  const NUMBER_OF_REQUESTS_TO_THE_API = 50;
 
   if (!cache.getLength()) {
     const promises = [...Array(NUMBER_OF_REQUESTS_TO_THE_API + 1).keys()]
