@@ -1,4 +1,4 @@
-![poke](assets\poke.jpg)
+![poke](assets/poke.jpg)
 
 ---
 
