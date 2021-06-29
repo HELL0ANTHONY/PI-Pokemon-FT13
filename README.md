@@ -159,7 +159,7 @@ export default Routes;
 
 ---
 
-##### Contact: [![linkedin](C:\Users\georg\Downloads\projects\PI-Pokemon-FT13\README.assets\linkedin.png)](https://www.linkedin.com/in/jorgeantoniofernandezdev/)
+##### Contact: [![linkedin](assets/linkedin.png)](https://www.linkedin.com/in/jorgeantoniofernandezdev/)
 
 ---
 
