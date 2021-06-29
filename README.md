@@ -156,3 +156,10 @@ export default Routes;
 #### Filter
 
 ![filter-pokemon](assets/filterbytype.png)
+
+---
+
+##### Contact: [![linkedin](C:\Users\georg\Downloads\projects\PI-Pokemon-FT13\README.assets\linkedin.png)](https://www.linkedin.com/in/jorgeantoniofernandezdev/)
+
+---
+
