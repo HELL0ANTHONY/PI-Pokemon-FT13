@@ -15,12 +15,10 @@ const Home = () => {
   const {
     modalSearchAttributes,
     handleFilter,
-    handleOrder,
-    handleSortOption,
-    handlePokemonsFromWhatDb,
+    selectAttributes,
   } = HomeLogic();
 
-  const { sortBy, filter, order, pokemonTypes, pokemonsFrom } = useSelector(
+  const { filter, pokemonTypes } = useSelector(
     state => state
   );
   const arrayOfTypes = pokemonTypes?.data?.map(({ name }) => name);
@@ -52,22 +50,12 @@ const Home = () => {
       <SearchResult />
       <CardsWithPagination />
       <Selects>
-        <span>
-          Sort:
-          <Select
-            initialValue={sortBy}
-            onChange={handleSortOption}
-            values={["default", "name", "force"]}
-          />
-        </span>
-        <span>
-          Order:
-          <Select
-            initialValue={order}
-            onChange={handleOrder}
-            values={["asc", "desc"]}
-          />
-        </span>
+        {selectAttributes().map(({ id, title, ...rest }) => (
+          <span key={id}>
+            {title}
+            <Select {...rest} />
+          </span>
+        ))}
         <span>
           Filter:
           {arrayOfTypes && (
@@ -77,14 +65,6 @@ const Home = () => {
               values={["all", ...arrayOfTypes]}
             />
           )}
-        </span>
-        <span>
-          From:
-          <Select
-            initialValue={pokemonsFrom}
-            onChange={handlePokemonsFromWhatDb}
-            values={["all", "database", "api"]}
-          />
         </span>
         <div>
           <button type="submit" onClick={openModal}>

@@ -38,12 +38,12 @@ const PokemonForm = () => {
         ))}
       </div>
 
+      <AddTypesModal {...newTypesModalAttributes} />
       <div>
         <ul
           className="list-types"
           style={{
-            display: `${selectPokemonTypes.pokeTypes.length ? "block" : "none"
-              }`,
+            display: `${selectPokemonTypes.pokeTypes.length ? "block" : "none"}`,
           }}
         >
           {selectPokemonTypes.pokeTypes.map((type, index) => (
@@ -65,9 +65,6 @@ const PokemonForm = () => {
             ))}
         </select>
       </div>
-
-      <AddTypesModal {...newTypesModalAttributes} />
-
       <div className="buttons">
         <Button
           onClick={openModalOfNewTypes}

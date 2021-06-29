@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useModal } from "../../hooks/useModal";
-
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setSortBy,
   changeOrder,
@@ -13,29 +12,13 @@ export const HomeLogic = () => {
   const [searchByName, setSearchByName] = useState("");
   const [isOpenSearchModal, openSearchModal, closeSearchModal] = useModal();
   const dispatch = useDispatch();
+  const { sortBy, order, pokemonFrom } = useSelector(state => state);
 
   return {
-    handleOrder,
     handleFilter,
-    handleSortOption,
+    selectAttributes,
     modalSearchAttributes,
-    handlePokemonsFromWhatDb,
   };
-
-  function handlePokemonsFromWhatDb(event) {
-    event.preventDefault();
-    dispatch(filterForDB(event.target.value));
-  }
-
-  function handleOrder(event) {
-    event.preventDefault();
-    dispatch(changeOrder(event.target.value));
-  }
-
-  function handleSortOption(event) {
-    event.preventDefault();
-    dispatch(setSortBy(event.target.value));
-  }
 
   function handleFilter(event) {
     event.preventDefault();
@@ -61,5 +44,40 @@ export const HomeLogic = () => {
         setSearchByName(event.target.value);
       },
     };
+  }
+
+  function selectAttributes() {
+    return [
+      {
+        id: 1,
+        title: "Sort:",
+        initialValue: sortBy,
+        values: ["default", "name", "force"],
+        onChange(event) {
+          event.preventDefault();
+          dispatch(setSortBy(event.target.value));
+        }
+      },
+      {
+        id: 2,
+        title: "Order:",
+        initialValue: order,
+        values: ["asc", "desc"],
+        onChange(event) {
+          event.preventDefault();
+          dispatch(changeOrder(event.target.value));
+        }
+      },
+      {
+        id: 3,
+        title: "From:",
+        initialValue: pokemonFrom,
+        values: ["all", "database", "api"],
+        onChange(event) {
+          event.preventDefault();
+          dispatch(filterForDB(event.target.value));
+        }
+      },
+    ];
   }
 };

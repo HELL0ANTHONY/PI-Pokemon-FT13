@@ -54,11 +54,8 @@ export const PokemonFormLogic = () => {
         event.preventDefault();
         let types = [];
         const options = event.target.options;
-        for (let i = 0, l = options.length; i < l; i++) {
-          if (options[i].selected) {
-            types.push(options[i].value);
-          }
-        }
+        for (let i = 0, l = options.length; i < l; i++)
+          if (options[i].selected) types.push(options[i].value);
         setSelectPokemonTypes({
           pokeTypes: [...selectPokemonTypes.pokeTypes, ...types],
         });
